@@ -1,6 +1,6 @@
 import './ResetPass.css';
 import bgpic from '../vendor/assets/bg-pic.png';
-import fbIcon from '../vendor/assets/FB-icon.png';
+import fbIcon from '../vendor/assets/FB-Icon.png';
 import googleIcon from '../vendor/assets/Google-Icon.png';
 import whIcon from '../vendor/assets/WH-Icon.png';
 import { useState, useEffect } from 'react';
