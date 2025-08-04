@@ -60,7 +60,12 @@ function Login() {
         
         toast.success('Login successful!');
         toast.dismiss(loadingToast);
-        navigate('/vendor/dashboard');
+
+        if(data.userType === 'vendor') {
+          navigate('/vendor/dashboard');
+        } else if(data.userType === 'hoster') {
+          navigate('/hoster/dashboard');
+        }
       } else {
         throw new Error('Login failed.');
       }
