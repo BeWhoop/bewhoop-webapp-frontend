@@ -31,6 +31,8 @@ import VendorDashboard from './vendor/pages/Dashboard';
 import VendorProtectedRoute from './vendor/additional_components/ProtectedRoute';
 import VendorPlaceholder from './vendor/additional_components/PlaceHolder';
 
+import ResetPass from './additional_pages/ResetPass';
+
 function App() {
   return (
     <HosterProvider>
@@ -62,6 +64,7 @@ function App() {
             {/* ─── Public Routes ─── */}
             <Route path="/" element={<HosterSignup />} />
             <Route path="/vendor/signup" element={<VendorSignup />} />
+            <Route path="/reset-password" element={<ResetPass />} />
 
             {/* ─── Hoster Routes ─── */}
             

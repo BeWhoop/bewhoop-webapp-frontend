@@ -14,8 +14,44 @@ function Signup() {
   const [maskedPassword, setMaskedPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showTOS, setShowTOS] = useState(false);
+  const [email, setEmail] = useState('');
   const { setVendorData } = useContext(VendorContext);
   const navigate = useNavigate();
+
+  const handlePassChange = async () => {
+    if (!email) {
+      toast.error('Please enter your email first');
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      toast.error('Please enter a valid Email.');
+      return;
+    }
+
+
+    try{
+      const baseURL = import.meta.env.VITE_MOBILE_BASE_URL;
+      const response = await fetch(`${baseURL}/users/password-reset-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error();
+      }
+      
+      toast.success('Password reset link sent to your email!');
+      setEmail('');
+    }
+    catch (error) {
+      toast.error('Error sending reset link. Please try again later.');
+      return;
+    }
+
+  };
 
   const handlePasswordChange = (e) => {
     const input = e.target.value;
@@ -26,6 +62,8 @@ function Signup() {
       setRealPassword((prev) => prev.slice(0, -1));
     }
     setMaskedPassword('●'.repeat(input.length));
+
+    
   };
 
   const handleSubmit = (e) => {
@@ -84,12 +122,14 @@ function Signup() {
           type="email"
           className="signup-simple-input"
           placeholder="Henna_Adam@gmail.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
         <div className="signup-password-container">
           <label className="signup-label1">Password</label>
-          <label className="signup-label2">Forgot Password?</label>
+          <label className="signup-label2" onClick={handlePassChange} style={{ cursor: 'pointer' }}>Forgot Password?</label>
         </div>
 
         <input
