@@ -162,7 +162,7 @@ function Signup() {
         </button>
 
         <label className="signup-label4" onClick={() => navigate('/')}>
-          Signup as a Host <span>Signup</span>
+          Already Have An Account? <span>Sign In</span>
           <br />
         </label>
 

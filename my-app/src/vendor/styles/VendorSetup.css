@@ -20,6 +20,7 @@ html, body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .vendorsetup-card {
@@ -264,86 +265,293 @@ select:focus {
   margin-left: 0rem !important;
   margin-top: 0rem;
 }
-
 @media (max-width: 768px) {
-  .vendorsetup-card {
-    flex-direction: column;
-  }
-
+  /* Hide the left background image section */
   .vendorsetup-left-bg {
-    width: 100%;
-    height: 30vh;
-    border-radius: 20px 20px 0 0;
-    padding-bottom: 1rem;
+    display: none;
   }
 
-  .vendorsetup-text-group h1 {
-    font-size: 24px;
-  }
-
-  .vendorsetup-text-group p {
-    font-size: 13px;
-    max-width: 90%;
+  /* Make the form take full width */
+  .vendorsetup-card {
+    display: block; /* Stack elements vertically */
+    height: auto; /* Allow height to adjust based on content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
   }
 
   .vendorsetup-info {
-    width: 100%;
-    padding: 2rem;
-    border-radius: 0 0 20px 20px;
+    width: 100% !important; /* Full width for the form */
+    padding: 2rem; /* Reduced padding for mobile */
+    border-radius: 0; /* Remove border radius */
+    min-height: auto; /* Allow natural height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content */
+    margin-left: 0; /* Remove left margin */
   }
 
+  /* Adjust labels */
   .vendorsetup-label1,
-  .vendorsetup-label2 {
-    font-size: 20px;
-    margin-top: 30px;
-    margin-bottom: 1rem;
+  .vendorsetup-label3 {
+    font-size: 18px !important; /* Smaller font size */
+    text-align: left; /* Center align */
+    margin-top: 0.5rem; /* Further reduced margin */
+    margin-bottom: 0.5rem; /* Further reduced margin */
+    margin-left: 0 !important; /* Remove left margin */
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    align-self: center; /* Ensure centered */
   }
 
+  /* Adjust text container */
   .vendorsetup-text-container {
-    width: 100%;
-    height: auto;
-    padding: 1rem;
+    width: 90% !important; /* Match input width */
+    max-width: 400px; /* Cap width */
+    height: 100px; /* Further reduced height */
+    padding: 0.6rem; /* Reduced padding */
+    margin: 0.3rem auto; /* Further reduced margin, centered */
+    align-self: center; /* Ensure centered */
   }
 
   .vendorsetup-events {
-    width: 100%;
-    font-size: 16px;
+    width: 100%; /* Full width within container */
+    padding: 0.6rem; /* Reduced padding */
+    font-size: 16px; /* Smaller font size */
+    margin: 0 auto; /* Center input */
+    margin-bottom: 0.3rem; /* Further reduced margin */
   }
 
   .vendorsetup-eventsAdded {
-    gap: 8px;
-  }
-
-  .vendorsetup-select-input,
-  .vendorsetup-simple-input {
-    width: 100%;
-    font-size: 16px;
-  }
-
-  .vendorsetup-price-range {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .vendorsetup-price-range .vendorsetup-input-range {
-    width: 100%;
-  }
-
-  .vendorsetup-next-button {
-    padding: 0.75rem 2rem;
-    font-size: 0.95rem;
-    border-radius: 20px;
-    align-self: center;
-    margin-left: 0;
+    gap: 6px; /* Further reduced gap */
+    justify-content: center; /* Center chips */
+    flex-wrap: wrap;
   }
 
   .vendorsetup-event-chip {
-    font-size: 13px;
-    padding: 5px 10px;
+    font-size: 12px; /* Smaller font size */
+    padding: 4px 8px; /* Reduced padding */
+  }
+
+  .vendorsetup-remove-btn {
+    font-size: 14px; /* Smaller font size */
+    margin-left: 6px; /* Reduced margin */
+  }
+
+  /* Adjust available events */
+  .vendorsetup-available-events {
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    gap: 6px; /* Further reduced gap */
+    margin: 0.5rem auto; /* Further reduced margin, centered */
+    justify-content: center; /* Center chips */
+    flex-wrap: wrap;
+    align-self: center; /* Ensure centered */
   }
 
   .vendorsetup-add-chip {
-    font-size: 13px;
-    padding: 5px 10px;
+    font-size: 12px; /* Smaller font size */
+    padding: 4px 8px; /* Reduced padding */
+  }
+
+  /* Adjust select input */
+  .vendorsetup-select-input {
+    width: 90% !important; /* Match input width */
+    max-width: 400px; /* Cap width */
+    padding: 0.6rem; /* Reduced padding */
+    font-size: 16px; /* Smaller font size */
+    margin: 0.3rem auto; /* Further reduced margin, centered */
+    align-self: center; /* Ensure centered */
+  }
+
+  /* Adjust simple input (map link) */
+  .vendorsetup-simple-input {
+    width: 90% !important; /* Match input width */
+    max-width: 400px; /* Cap width */
+    padding: 0.6rem; /* Reduced padding */
+    font-size: 16px; /* Smaller font size */
+    margin: 0.3rem auto; /* Further reduced margin, centered */
+    align-self: center; /* Ensure centered */
+  }
+
+  /* Adjust price range */
+  .vendorsetup-price-range {
+    width: 90% !important; /* Match input width */
+    max-width: 400px; /* Cap width */
+    gap: 0.3rem; /* Further reduced gap */
+    margin: 0.3rem auto; /* Further reduced margin, centered */
+    flex-direction: column; /* Stack inputs vertically for mobile */
+    align-self: center; /* Ensure centered */
+  }
+
+  .vendorsetup-price-range .vendorsetup-input-range {
+    width: 100%; /* Full width within container */
+    padding: 0.6rem; /* Reduced padding */
+    font-size: 16px; /* Smaller font size */
+    margin: 0; /* Remove extra margins */
+  }
+
+  /* Adjust next button */
+  .vendorsetup-next-button {
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    padding: 0.75rem; /* Reduced padding */
+    margin: 0.3rem auto; /* Further reduced margin, centered */
+    border-radius: 20px; /* Smaller radius */
+    font-size: 0.9rem; /* Smaller font */
+    align-self: center !important; /* Center align */
+  }
+
+  /* Adjust error messages */
+  .vendorsetup-error-fields {
+    text-align: center; /* Center align */
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    margin: 0.2rem auto; /* Further reduced margin, centered */
+    align-self: center; /* Ensure centered */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Hide the left background image section */
+  .vendorsetup-left-bg {
+    display: none;
+  }
+
+  /* Make the form take full width */
+  .vendorsetup-card {
+    display: block; /* Stack elements vertically */
+    height: auto; /* Allow height to adjust based on content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+  }
+
+  .vendorsetup-info {
+    width: 100% !important; /* Full width for the form */
+    padding: 2.5rem; /* Slightly reduced padding */
+    border-radius: 0; /* Remove border radius */
+    min-height: auto; /* Allow natural height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content */
+    margin-left: 0; /* Remove left margin */
+  }
+
+  /* Adjust labels */
+  .vendorsetup-label1,
+  .vendorsetup-label3 {
+    font-size: 20px !important; /* Slightly larger than mobile */
+    text-align: left; /* Center align */
+    margin-top: 0.8rem; /* Reduced margin */
+    margin-bottom: 0.8rem; /* Reduced margin */
+    margin-left: 0 !important; /* Remove left margin */
+    width: 80%; /* Match input width */
+    max-width: 500px; /* Cap width */
+    align-self: center; /* Ensure centered */
+  }
+
+  /* Adjust text container */
+  .vendorsetup-text-container {
+    width: 80% !important; /* Match input width */
+    max-width: 500px; /* Cap width */
+    height: 110px; /* Slightly reduced height */
+    padding: 0.7rem; /* Slightly reduced padding */
+    margin: 0.5rem auto; /* Reduced margin, centered */
+    align-self: center; /* Ensure centered */
+    gap: 0.8rem; /* Reduced gap */
+  }
+
+  .vendorsetup-events {
+    width: 100%; /* Full width within container */
+    padding: 0.7rem; /* Slightly reduced padding */
+    font-size: 18px; /* Match base style */
+    margin: 0 auto; /* Center input */
+    margin-bottom: 0.5rem; /* Reduced margin */
+  }
+
+  .vendorsetup-eventsAdded {
+    gap: 8px; /* Reduced gap */
+    justify-content: center; /* Center chips */
+    flex-wrap: wrap;
+  }
+
+  .vendorsetup-event-chip {
+    font-size: 14px; /* Match base style */
+    padding: 5px 10px; /* Slightly reduced padding */
+  }
+
+  .vendorsetup-remove-btn {
+    font-size: 16px; /* Match base style */
+    margin-left: 8px; /* Match base style */
+  }
+
+  /* Adjust available events */
+  .vendorsetup-available-events {
+    width: 80%; /* Match input width */
+    max-width: 500px; /* Cap width */
+    gap: 8px; /* Reduced gap */
+    margin: 0.8rem auto; /* Reduced margin, centered */
+    justify-content: center; /* Center chips */
+    flex-wrap: wrap;
+    align-self: center; /* Ensure centered */
+  }
+
+  .vendorsetup-add-chip {
+    font-size: 14px; /* Match base style */
+    padding: 5px 10px; /* Slightly reduced padding */
+  }
+
+  /* Adjust select input */
+  .vendorsetup-select-input {
+    width: 80% !important; /* Match input width */
+    max-width: 500px; /* Cap width */
+    padding: 0.7rem; /* Slightly reduced padding */
+    font-size: 18px; /* Match base style */
+    margin: 0.5rem auto; /* Reduced margin, centered */
+    align-self: center; /* Ensure centered */
+  }
+
+  /* Adjust simple input (map link) */
+  .vendorsetup-simple-input {
+    width: 80% !important; /* Match input width */
+    max-width: 500px; /* Cap width */
+    padding: 0.7rem; /* Slightly reduced padding */
+    font-size: 18px; /* Match base style */
+    margin: 0.5rem auto; /* Reduced margin, centered */
+    align-self: center; /* Ensure centered */
+  }
+
+  /* Adjust price range */
+  .vendorsetup-price-range {
+    width: 80% !important; /* Match input width */
+    max-width: 500px; /* Cap width */
+    gap: 0.5rem; /* Reduced gap */
+    margin: 0.5rem auto; /* Reduced margin, centered */
+    flex-direction: row; /* Side by side for tablets */
+    align-self: center; /* Ensure centered */
+  }
+
+  .vendorsetup-price-range .vendorsetup-input-range {
+    width: 50%; /* Match base style */
+    padding: 0.7rem 1rem; /* Match base style */
+    font-size: 18px; /* Match base style */
+    margin: 0; /* Remove extra margins */
+  }
+
+  /* Adjust next button */
+  .vendorsetup-next-button {
+    width: 80%; /* Match input width */
+    max-width: 500px; /* Cap width */
+    padding: 0.8rem; /* Slightly reduced padding */
+    margin: 0.5rem auto; /* Reduced margin, centered */
+    border-radius: 25px; /* Slightly smaller radius */
+    font-size: 1rem; /* Match base style */
+    align-self: center !important; /* Center align */
+  }
+
+  /* Adjust error messages */
+  .vendorsetup-error-fields {
+    text-align: center; /* Center align */
+    width: 80%; /* Match input width */
+    max-width: 500px; /* Cap width */
+    margin: 0.3rem auto; /* Reduced margin, centered */
+    align-self: center; /* Ensure centered */
   }
 }

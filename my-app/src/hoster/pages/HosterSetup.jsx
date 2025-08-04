@@ -106,7 +106,7 @@ function HosterSetup() {
           message.toLowerCase().includes('already in use')
         ) {
           toast.error('User already exists. Redirecting to signup...');
-          setTimeout(() => navigate('/'), 2000);
+          setTimeout(() => navigate('/hoster/signup'), 2000);
         }
       }
     } catch (err) {

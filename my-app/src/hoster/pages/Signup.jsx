@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Signup.css';
+import '../styles/Signup1.css';
 import signup from '../assets/Signup-bg.png';
 import googleIcon from '../assets/Google-Icon.png';
 import fbIcon from '../assets/FB-Icon.png';
@@ -102,53 +102,53 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-vendor-card">
-      <div className="signup-left-bg" style={{ backgroundImage: `url(${signup})` }}>
-        <div className="signup-text-group">
+    <div className="signup1-vendor-card">
+      <div className="signup1-left-bg" style={{ backgroundImage: `url(${signup})` }}>
+        <div className="signup1-text-group">
           <h1>Connect with Hosts</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
         </div>
       </div>
 
-      <form className="signup-vendor-info" onSubmit={handleSubmit}>
+      <form className="signup1-vendor-info" onSubmit={handleSubmit}>
         <div className="signup1-title-group">
           <h1>Join as an Event Host</h1>
           <p>Create an account to join as a host</p>
         </div>
 
-        <label className="signup-label1">Full Name</label>
+        <label className="signup1-label1">Full Name</label>
         <input
           name="fullName"
-          className="signup-simple-input"
+          className="signup1-simple-input"
           placeholder="Example: Henna Adam"
 
         />
 
-        <label className="signup-label1">Email</label>
+        <label className="signup1-label1">Email</label>
         <input
           name="email"
           type="email"
-          className="signup-simple-input"
+          className="signup1-simple-input"
           placeholder="Henna_Adam@gmail.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <div className="signup-password-container">
-          <label className="signup-label1">Password</label>
-          <label className="signup-label2" onClick={handlePassChange} style={{ cursor: 'pointer' }}>Forgot Password?</label>
+        <div className="signup1-password-container">
+          <label className="signup1-label1">Password</label>
+          <label className="signup1-label2" onClick={handlePassChange} style={{ cursor: 'pointer' }}>Forgot Password?</label>
         </div>
 
         <input
           type="text"
-          className="signup-simple-input"
+          className="signup1-simple-input"
           placeholder="● ● ● ● ● ●"
           value={maskedPassword}
           onChange={handlePasswordChange}
           minLength={6}
         />
 
-        <label className="signup-label3">
+        <label className="signup1-label3">
           <input
             type="checkbox"
             checked={termsAccepted}
@@ -162,25 +162,25 @@ const Signup = () => {
           </a>
         </label>
 
-        <button type="submit" className="signup-next-button">
+        <button type="submit" className="signup1-next-button">
           SignUp
         </button>
 
-        <label className="signup-label4" onClick={() => navigate('/vendor/signup')}>
-          Signup as a Vendor <span>Signup</span>
+        <label className="signup1-label4" onClick={() => navigate('/')}>
+          Already Have An Account? <span>Sign In</span>
           <br />
         </label>
 
-        <div className="signup-social-icons">
-          <div className="signup-divider-with-text">
-            <span className="signup-line"></span>
-            <span className="signup-or-text">or</span>
-            <span className="signup-line"></span>
+        <div className="signup1-social-icons">
+          <div className="signup1-divider-with-text">
+            <span className="signup1-line"></span>
+            <span className="signup1-or-text">or</span>
+            <span className="signup1-line"></span>
           </div>
 
-          <span className="signup-login-text">Login with Social Apps</span>
+          <span className="signup1-login-text">Login with Social Apps</span>
 
-          <div className="signup-social-icons-icons">
+          <div className="signup1-social-icons-icons">
             <img src={fbIcon} alt="fb-icon" />
             <img src={googleIcon} alt="google-icon" />
             <img src={whIcon} alt="whatsapp-icon" />

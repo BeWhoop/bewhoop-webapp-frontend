@@ -252,83 +252,152 @@ html, body {
   margin-top: 0rem;
 }
 
-@media (max-width: 768px) {
-  .signup-vendor-card {
-    flex-direction: column;
-  }
-
+@media (max-width: 1236px) {
+  /* Hide the left background image section */
   .signup-left-bg {
-    width: 100% !important;
-    height: 30vh;
-    border-radius: 20px 20px 0 0 !important;
-    padding-bottom: 1rem;
+    display: none;
   }
 
-  .signup-text-group h1 {
-    font-size: 24px;
-  }
-
-  .signup-text-group p {
-    font-size: 13px;
-    max-width: 90%;
+  /* Make the form take full width */
+  .signup-vendor-card {
+    display: block; /* Stack elements vertically */
+    height: auto; /* Allow height to adjust based on content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
   }
 
   .signup-vendor-info {
-    width: 100%;
-    padding: 2rem;
-    border-radius: 0 0 20px 20px;
+    width: 100% !important; /* Full width for the form */
+    padding: 2rem; /* Reduced padding for mobile */
+    border-radius: 0; /* Remove border radius for full-screen effect */
+    min-height: 100vh; /* Ensure form takes full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content */
+  }
+
+  /* Adjust title group */
+  .signup-title-group {
+    margin-left: 0; /* Remove left margin */
+    align-items: center; /* Center align title and text */
+    text-align: center;
+    margin-top: 1rem;
   }
 
   .signup-title-group h1 {
-    font-size: 24px;
+    font-size: 24px !important; /* Smaller font size */
+    margin-left: 0; /* Remove left margin */
   }
 
   .signup-title-group p {
-    font-size: 13px;
+    font-size: 16px; /* Smaller font size */
+    margin-left: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem; /* Reduced margin */
   }
 
+  /* Adjust input fields */
+  .signup-simple-input {
+    width: 90%; /* Slightly narrower for centering */
+    max-width: 400px; /* Cap width */
+    margin-left: 0; /* Center by removing left margin */
+    font-size: 16px; /* Smaller font size */
+    padding: 0.6rem; /* Reduced padding */
+    margin-bottom: 0.5rem; /* Reduced margin */
+  }
+
+  /* Adjust labels */
   .signup-label1,
   .signup-label2,
   .signup-label3 {
-    font-size: 16px;
-    margin-left: 1rem;
+    margin-left: 0; /* Remove left margin */
+    font-size: 14px; /* Smaller font size */
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    margin: 0.5rem 0; /* Reduced vertical margin */
   }
 
-  .signup-simple-input {
-    width: 90%;
-    margin-left: 1rem;
-    font-size: 16px;
-  }
-
+  /* Adjust password container */
   .signup-password-container {
-    width: 90%;
-    margin-left: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    flex-direction: column; /* Stack labels vertically */
+    gap: 0.3rem; /* Reduced gap */
+    margin-left: 0;
+    margin-bottom: 0.5rem; /* Reduced margin */
   }
 
+  .signup-label2 {
+    align-self: flex-end; /* Align "Forgot Password" to the right */
+  }
+
+  /* Adjust submit button */
   .signup-next-button {
-    padding: 0.75rem 2.5rem;
-    font-size: 0.95rem;
-    border-radius: 20px;
-    align-self: center;
-    margin: 1.5rem auto 0 auto;
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    padding: 0.75rem; /* Reduced padding */
+    margin-left: 0; /* Center by removing left margin */
+    margin-top: 1rem; /* Reduced margin */
+    border-radius: 20px; /* Smaller radius */
+    font-size: 0.9rem; /* Smaller font */
+  }
+
+  /* Adjust social icons section */
+  .signup-social-icons {
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    margin: 0.3rem auto; /* Reduced margin, centered */
+    align-items: center; /* Ensure centered */
+    gap: 5px; /* Reduced gap */
+  }
+
+  .signup-login-text {
+    text-align: center; /* Ensure centered */
+    font-size: 14px; /* Smaller font */
+    margin: 0; /* Remove margins */
+  }
+
+  .signup-social-icons-icons {
+    gap: 12px; /* Reduced gap */
+    justify-content: center; /* Ensure centered */
+    margin: 0.2rem 0; /* Reduced margin */
   }
 
   .signup-social-icons-icons img {
-    width: 35px;
+    width: 35px; /* Smaller icons */
     height: 35px;
   }
 
+  /* Adjust divider */
   .signup-divider-with-text {
-    max-width: 90%;
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    margin: 0.2rem auto; /* Reduced margin, centered */
+    gap: 8px; /* Reduced gap */
   }
 
-  .signup-or-text {
-    font-size: 12px;
+  .signup-line {
+    width: 100% !important; /* Full width for lines */
   }
 
+  /* Adjust "Signup as a Vendor" link */
   .signup-label4 {
-    font-size: 14px;
+    margin: 0.3rem auto; /* Reduced margin, centered */
+    text-align: center; /* Ensure centered */
+    font-size: 14px; /* Smaller font */
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+  }
+
+  .signup-label4 span {
+    margin-left: 5px;
+  }
+
+  /* Ensure error messages are properly aligned */
+  .error-fields {
+    margin-left: 0 !important; /* Remove left margin */
+    text-align: center; /* Center align */
+    width: 90%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    margin-top: 0.3rem; /* Reduced margin */
   }
 }

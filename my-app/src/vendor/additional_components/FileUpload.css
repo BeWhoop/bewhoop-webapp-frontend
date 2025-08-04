@@ -87,7 +87,7 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1551px) {
   .fileupload-container {
     flex-direction: column;
     align-items: center;

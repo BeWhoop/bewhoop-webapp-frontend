@@ -20,13 +20,13 @@ html, body {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
 }
 
-.reset-vendor-card {
+.login-vendor-card {
   display: flex;
   width: 100%;
   height: 100vh;
 }
 
-.reset-left-bg {
+.login-left-bg {
   width: 50%;
   height: 100vh;
   background-size: cover;
@@ -38,7 +38,7 @@ html, body {
   padding-bottom: 3rem;
 }
 
-.reset-text-group {
+.login-text-group {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -46,14 +46,14 @@ html, body {
   margin-bottom: 3rem;
 }
 
-.reset-text-group h1 {
+.login-text-group h1 {
   font-family: 'BricolageGrotesque-Medium', sans-serif;
   font-size: 32px;
   color: white;
   margin-bottom: 0.5rem;
 }
 
-.reset-text-group p {
+.login-text-group p {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 14px;
   max-width: 80%;
@@ -61,7 +61,7 @@ html, body {
   color: white;
 }
 
-.reset-vendor-info {
+.login-vendor-info {
   width: 50%;
   padding: 4rem;
   background-color: #ffffff;
@@ -71,7 +71,7 @@ html, body {
   margin-left:4rem;
 }
 
-.reset-title-group {
+.login-title-group {
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -80,14 +80,14 @@ html, body {
   margin-top: 2rem;
 }
 
-.reset-title-group h1 {
+.login-title-group h1 {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 32px;
   color: #202224;
   margin-left: 3rem;
 }
 
-.reset-title-group p {
+.login-title-group p {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 18px;
   color: #202224;
@@ -96,21 +96,21 @@ html, body {
   margin-bottom: 2rem;
 }
 
-.reset-password-container {
+.login-password-container {
   margin-top: 2rem;
   width: 80%;
   display: flex;
   justify-content: space-between;
 }
 
-.reset-label1 {
+.login-label1 {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 16px;
   color: #202224;
   margin: 0.8rem 0 1rem 2rem;
 }
 
-.reset-input-wrapper {
+.login-input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -119,7 +119,7 @@ html, body {
   margin-bottom: 1rem;
 }
 
-.reset-simple-input {
+.login-simple-input {
   width: 100%;
   padding: 0.8rem;
   padding-right: 2.5rem;
@@ -133,12 +133,12 @@ html, body {
 }
 
 
-.reset-simple-input:focus {
+.login-simple-input:focus {
   outline: none;
   border-color: #818181;
 }
 
-.reset-eye-icon {
+.login-eye-icon {
   position: absolute;
   right: 20px;
   cursor: pointer;
@@ -146,8 +146,9 @@ html, body {
   font-size: 20px;
 }
 
-.reset-next-button {
+.login-next-button {
   background-color: #BE0000;
+  width:75%;
   color: white;
   padding: 0.75rem 10.5rem;
   border: none;
@@ -156,15 +157,15 @@ html, body {
   cursor: pointer;
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   align-self: flex-start;
-  margin-left: 2rem;
+  margin-left: 2.5rem;
   margin-top: 3rem;
 }
 
-.reset-next-button:hover {
+.login-next-button:hover {
   background-color: #df4545;
 }
 
-.reset-label4 {
+.login-label4 {
   font-family: 'BricolageGrotesque-Medium', sans-serif;
   font-size: 16px;
   color: #8A8B8C;
@@ -172,61 +173,66 @@ html, body {
   cursor: pointer;
 }
 
-.reset-label4 span {
+.login-label4 span {
   color: #5A8CFF;
   text-decoration: underline;
   margin-left: 5px;
   cursor: pointer;
 }
-
-.reset-social-icons {
+.login-social-icons {
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
-  margin-left: 13rem;
-  margin-top: 0.5rem;
+  align-items: center; /* Center the section */
+  width: 80%;
+  max-width: 500px;
+  margin: 3rem auto;
+  margin-left:3rem;
   gap: 10px;
 }
 
-.reset-divider-with-text {
+.login-divider-with-text {
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 500px;
-  margin-top: 4rem;
+  margin: 1rem auto;
   gap: 20px;
-  margin-bottom:1rem;
 }
 
-.reset-line {
+.login-line {
   flex: 1;
   height: 1px;
   background-color: #FF5315;
 }
 
-.reset-or-text {
+.login-or-text {
   font-size: 14px;
   color: #FF5315;
   font-family: 'BricolageGrotesque-Bold', sans-serif;
 }
 
-.reset-login-text {
+.login-login-text {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   color: #8A8B8C;
-  margin-left: 2.5rem;
+  text-align: center;
 }
 
-.reset-social-icons-icons {
+.login-login-text a {
+  color: #BE0000;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-social-icons-icons {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
-.reset-social-icons-icons img {
-  width: 40px;
-  height: 40px;
+.login-social-icons-icons img {
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   cursor: pointer;
 }
@@ -235,16 +241,16 @@ html, body {
 /* Media Queries for Responsive Design */
 
 @media (max-width: 1236px) {
-  .reset-vendor-card {
+  .login-vendor-card {
     flex-direction: column;
     height: auto;
   }
 
-  .reset-left-bg {
+  .login-left-bg {
     display: none; /* Hide background image on mobile to save space */
   }
 
-  .reset-vendor-info {
+  .login-vendor-info {
     width: 100%;
     padding: 1.5rem;
     border-radius: 0;
@@ -253,54 +259,54 @@ html, body {
     margin-left:0;
   }
 
-  .reset-title-group {
+  .login-title-group {
     margin-left: 0;
     margin-top: 0;
     align-items: center;
     text-align: center;
   }
 
-  .reset-title-group h1 {
+  .login-title-group h1 {
     font-size: 24px;
     margin-left: 0;
   }
 
-  .reset-title-group p {
+  .login-title-group p {
     font-size: 14px;
     margin-left: 0;
     margin-top: 0.8rem;
     margin-bottom: 1rem;
   }
 
-  .reset-password-container {
+  .login-password-container {
     width: 100%;
     margin-top: 1rem;
   }
 
-  .reset-label1 {
+  .login-label1 {
     font-size: 13px;
     margin: 0.4rem 0 0.6rem 1.5rem;
   }
 
-  .reset-input-wrapper {
+  .login-input-wrapper {
     width: 95%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0.6rem;
   }
 
-  .reset-simple-input {
+  .login-simple-input {
     font-size: 16px;
     padding: 0.6rem;
     padding-right: 1.8rem;
   }
 
-  .reset-eye-icon {
+  .login-eye-icon {
     right: 10px;
     font-size: 16px;
   }
 
-  .reset-next-button {
+  .login-next-button {
     padding: 0.6rem 0;
     width: 90%;
     margin-left: auto;
@@ -310,19 +316,23 @@ html, body {
     border-radius: 25px;
   }
 
-  .reset-label4 {
+  .login-label4 {
     margin: 10px auto;
     font-size: 13px;
     text-align: center;
   }
 
-  .reset-social-icons {
-    margin-left: 0;
-    margin-top: 0;
-    align-self: center;
+  .login-social-icons {
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    
   }
 
-  .reset-divider-with-text {
+  .login-divider-with-text {
     max-width: 300px;
     margin-top: 2rem;
     gap: 10px;
@@ -330,22 +340,22 @@ html, body {
     margin-right: auto;
   }
 
-  .reset-or-text {
+  .login-or-text {
     font-size: 12px;
   }
 
-  .reset-login-text {
+  .login-login-text {
     font-size: 13px;
     margin-left: 0;
     text-align: center;
   }
 
-  .reset-social-icons-icons {
+  .login-social-icons-icons {
     gap: 15px;
     margin-top: 0.8rem;
   }
 
-  .reset-social-icons-icons img {
+  .login-social-icons-icons img {
     width: 30px;
     height: 30px;
   }
