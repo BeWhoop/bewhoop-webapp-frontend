@@ -13,7 +13,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
+  const baseURL = import.meta.env.VITE_MOBILE_BASE_URL;
   const navigate = useNavigate();
 
   const isPasswordValid = (pwd) => {
@@ -43,7 +43,7 @@ function Login() {
     const loadingToast = toast.loading('Logging in...');
 
     try {
-      const response = await fetch(`${baseURL}/login`, {
+      const response = await fetch(`${baseURL}/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

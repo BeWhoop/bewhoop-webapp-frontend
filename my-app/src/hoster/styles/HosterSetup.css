@@ -265,42 +265,53 @@ html, body {
   background-color: #df4545;
 }
 
-/* Responsive styles */
+/* Responsive styles *//* Responsive styles */
 @media (max-width: 834px) {
   .hostersetup-card {
     flex-direction: column;
+    align-items: center;
   }
 
   .hostersetup-left-bg {
-    display:none;
+    display: none;
   }
 
-  .hostersetup-text-group h1 {
-    font-size: 24px;
+  .hostersetup-title-group {
+    margin-left: 0;
+    text-align: center;
   }
-
-  .hostersetup-text-group p {
-    font-size: 13px;
-    max-width: 90%;
+  .hostersetup-title-group h1{
+    font-size: 28px;
+    margin-left: 0;
+  }
+  .hostersetup-title-group p {
+    font-size: 14px;
+    margin-left: 0;
   }
 
   .hostersetup-info {
     width: 100%;
     padding: 2rem;
     border-radius: 0 0 20px 20px;
+    margin: 0 auto;
   }
 
   .hostersetup-label1,
-  .hostersetup-label2 {
+  .hostersetup-label3 {
     font-size: 20px;
     margin-top: 30px;
     margin-bottom: 1rem;
+    margin-left: 0;
+    text-align: left;
   }
 
-  .hostersetup-text-container {
+  .hostersetup-select-input,
+  .hostersetup-simple-input,
+  .hostersetup-text-container,
+  .hostersetup-available-events {
     width: 100%;
-    height: auto;
-    padding: 1rem;
+    margin-left: 0 !important;
+    font-size: 16px;
   }
 
   .hostersetup-events {
@@ -312,27 +323,16 @@ html, body {
     gap: 8px;
   }
 
-  .hostersetup-select-input,
-  .hostersetup-simple-input {
-    width: 100%;
-    font-size: 16px;
-  }
-
   .hostersetup-next-button {
-    padding: 0.75rem 2rem;
     font-size: 0.95rem;
     border-radius: 20px;
-    align-self: center;
-    margin-left: 0;
+    margin: 2rem auto 0 auto; /* ✅ Centered */
   }
 
-  .hostersetup-event-chip {
-    font-size: 13px;
-    padding: 5px 10px;
-  }
-
+  .hostersetup-event-chip,
   .hostersetup-add-chip {
     font-size: 13px;
     padding: 5px 10px;
   }
 }
+

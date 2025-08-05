@@ -29,9 +29,11 @@ html, body {
 }
 
 .signup1-left-bg {
+  
   position: relative;
   width: 57% !important;
-  height: 100vh;
+  height: auto; /* Remove fixed height */
+  min-height: 100vh;
   background-size: cover;
   background-position: 80% center;
   display: flex;
@@ -325,12 +327,16 @@ html, body {
 
   /* Adjust submit button */
   .signup1-next-button {
-    width: 100%; /* Full width button */
-    padding: 0.75rem; /* Adjust padding */
-    margin-left: 0; /* Remove left margin */
-    margin-top: 1rem;
-    margin-bottom:0.2rem;
-    border-radius: 20px; /* Slightly smaller radius */
+    width: 100%; /* Match input width */
+    max-width: 400px; /* Cap width */
+    padding: 0.75rem; /* Reduced padding */
+    display:flex;
+
+    justify-content: center; /* Center button */
+    align-items: center; /* Center text */
+    margin: 0.5rem auto; /* Centered with reduced margin */
+    border-radius: 20px; /* Smaller radius */
+    /* Smaller radius */ /* Slightly smaller radius */
     font-size: 0.9rem; /* Smaller font size */
   }
 

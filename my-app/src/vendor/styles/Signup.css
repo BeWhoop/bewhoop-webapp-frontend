@@ -335,9 +335,13 @@ html, body {
     width: 90%; /* Match input width */
     max-width: 400px; /* Cap width */
     padding: 0.75rem; /* Reduced padding */
-    margin-left: 0; /* Center by removing left margin */
-    margin-top: 1rem; /* Reduced margin */
+    display:flex;
+
+    justify-content: center; /* Center button */
+    align-items: center; /* Center text */
+    margin: 0.5rem auto; /* Centered with reduced margin */
     border-radius: 20px; /* Smaller radius */
+    /* Smaller radius */
     font-size: 0.9rem; /* Smaller font */
   }
 
