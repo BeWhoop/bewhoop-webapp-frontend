@@ -95,12 +95,13 @@ function Signup() {
 
   return (
     <div className="signup-vendor-card">
-      <div className="signup-left-bg" style={{ backgroundImage: `url(${signup})` }}>
-        <div className="signup-text-group">
-          <h1>Connect with Hosts</h1>
-          <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
-        </div>
+      <div className="signup-left-bg">
+      <div className="signup-text-group">
+       <h1>Connect with Hosts</h1>
+       <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
       </div>
+     </div>
+
 
       <form className="signup-vendor-info" onSubmit={handleSubmit}>
         <div className="signup-title-group">
@@ -128,8 +129,7 @@ function Signup() {
         />
 
         <div className="signup-password-container">
-          <label className="signup-label1">Password</label>
-          <label className="signup-label2" onClick={handlePassChange} style={{ cursor: 'pointer' }}>Forgot Password?</label>
+          <label className="signup-label1" >Password</label>
         </div>
 
         <input

@@ -25,22 +25,30 @@ html, body {
 .signup-vendor-card {
   display: flex;
   width: 100%;
-  height:100vh;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .signup-left-bg {
-  position: relative;
-  width: 57% !important;
-  height: 100vh;
+  flex: 1;
+  background-image: url('../assets/Signup-bg.png');
   background-size: cover;
-  background-position: 80% center;
+  background-position: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding-bottom: 3rem;
+  padding: 3rem;
 }
 
+.signup-vendor-info {
+  flex: 1;
+  padding: 4rem;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+}
 .signup-text-group {
   margin-bottom: 3rem;
   text-align: center;
@@ -52,7 +60,7 @@ html, body {
 .signup-text-group h1 {
   font-family: 'BricolageGrotesque-Medium', sans-serif;
   font-size: 32px;
-  color: white !important;
+  color: white ;
   margin-bottom: 0.5rem;
 }
 
@@ -62,17 +70,9 @@ html, body {
   margin-left: 0.5rem;
   max-width: 80%;
   text-align: center;
-  color: white !important;
+  color: white ;
 }
 
-.signup-vendor-info {
-  width: 50% !important;
-  padding: 4rem;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
-}
 
 .signup-title-group {
   text-align: left; /* change from center */
@@ -87,14 +87,14 @@ html, body {
 .signup-title-group h1 {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 32px;
-  color: #202224 !important;
+  color: #202224  ;
   margin-left: 3rem;
 }
 
 .signup-title-group p {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 18px;
-  color: #202224 !important;
+  color: #202224  ;
   margin-left: 0.75rem;
   margin-top: 1.5rem;
   margin-bottom: 2rem;
@@ -137,9 +137,10 @@ html, body {
   text-align: left;
   width: 100%;
   display: block;
-  margin: 20px 0 0 11rem; /* top, right, bottom, left */
+  margin: 20px 0 0 11rem;
   cursor:pointer;
 }
+
 .signup-label4 span {
   font-family: 'BricolageGrotesque-Medium', sans-serif;
   font-size: 16px;
@@ -147,13 +148,14 @@ html, body {
   text-decoration: underline;
   text-align: left;
   width: 100%;
-  margin: 20px 0 0 5px; /* top, right, bottom, left */
+  margin: 20px 0 0 5px; 
   cursor:pointer;
 }
 
 
 .signup-simple-input {
-  width: 75.5%;
+  width: 100%;
+  max-width: 550px;
   padding: 0.8rem;
   border-radius: 8px;
   border: 1px solid #D5D5D5;
@@ -168,18 +170,20 @@ html, body {
   outline: none;
   border-color: #818181; /* light grey */
 }
+
 .signup-next-button {
   background-color: #BE0000;
   color: white;
-  padding: 0.75rem 14rem;
+  padding: 0.75rem;
   border: none;
   border-radius: 30px;
   font-size: 1rem;
   cursor: pointer;
   font-family: 'BricolageGrotesque-Bold', sans-serif;
+  width: 100%;
+  max-width: 550px;
   align-self: flex-start;
-  margin-left: 2rem;
-  margin-top: 2rem;
+  margin: 2rem auto 0 2rem; /* top auto bottom auto */
   display: block;
 }
 
@@ -227,14 +231,14 @@ html, body {
 
 .signup-line {
   flex: 1;
-  width: 200px !important;
+  width: 200px  ;
   height: 1px;
   background-color: #FF5315;
 }
 
 .signup-or-text {
   font-size: 14px;
-  color: #FF5315 !important;
+  color: #FF5315  ;
   font-family: 'BricolageGrotesque-Bold', sans-serif;
 }
 
@@ -248,142 +252,160 @@ html, body {
   color: red;
   font-family: 'BricolageGrotesque-Medium', sans-serif;
   min-height: 1rem;
-  margin-left: 2rem !important;
+  margin-left: 2rem  ;
   margin-top: 0rem;
 }
 
-
-@media (max-width: 1236px) {
-
+@media (max-width: 850px) {
   .signup-left-bg {
     display: none;
   }
 
-  /* Make the form take full width */
   .signup-vendor-card {
-    display: block; /* Change from flex to block to stack elements */
-    height: auto; /* Allow height to adjust based on content */
-    overflow-y: auto; /* Allow scrolling if content overflows */
+    display: block;
+    height: auto;
+    overflow-y: auto;
   }
 
   .signup-vendor-info {
-    width: 100% !important; /* Full width for the form */
-    padding: 2rem; /* Reduce padding for smaller screens */
-    border-radius: 0; /* Remove border radius for full-screen effect */
-    min-height: 100vh; /* Ensure form takes full viewport height */
+    width: 100%;
+    padding: 2rem;
+    border-radius: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Adjust title group for smaller screens */
   .signup-title-group {
-    margin-left: 0; /* Remove left margin */
-    align-items: center; /* Center align title and text */
+    margin-left: 0;
+    align-items: center;
     text-align: center;
-    margin-top:0.2rem;
+    margin-top: 0.2rem;
   }
 
   .signup-title-group h1 {
-    font-size: 24px; /* Reduce font size */
-    margin-left: 0; /* Remove left margin */
+    font-size: 24px;
+    margin-left: 0;
   }
 
   .signup-title-group p {
-    font-size: 16px; /* Reduce font size */
-    margin-left: 0;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    font-size: 16px;
+    margin: 1rem 0 1.5rem 0;
   }
 
-  /* Adjust input fields */
   .signup-simple-input {
-    width: 100%; /* Full width for inputs */
-    margin-left: 0; /* Remove left margin */
-    font-size: 16px; /* Slightly smaller font size */
-    padding: 0.6rem; /* Adjust padding */
+    width: 100%;
+    max-width: 400px;
+    margin-left: 0;
+    font-size: 16px;
+    padding: 0.6rem;
   }
 
-  /* Adjust labels */
-  .signup-label2,
+  /* ✅ Adjusted alignment */
+  .signup-label1 {
+    text-align: left;
+    width: 100%;
+    max-width: 400px;
+    margin: 0.8rem auto 1rem auto;
+  }
+
+  .signup-label2 {
+    text-align: center;
+    font-size: 14px;
+    margin: 0.5rem 0 1rem 0;
+  }
+
   .signup-label3 {
-    margin-left: 0; /* Remove left margin */
-    font-size: 14px; /* Reduce font size */
+    text-align: left;
+    width: 100%;
+    max-width: 400px;
+    margin: 0.75rem auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  /* Adjust password container */
   .signup-password-container {
-    width: 100%; /* Full width */
-    flex-direction: row; /* Stack labels vertically */
-    gap: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    flex-direction: row;
+    justify-content: space-between;
     margin-left: 0;
   }
-  .signup-label1{
-    font-size: 14px; /* Reduce font size */
-    margin-left: 0 !important; 
-    text-align: flex-start; /* Center align label */
-  }
-  .signup-label2 {
-    margin-top: 0.5; /* Remove extra margin */
-    align-self: flex-end; /* Align "Forgot Password" to the right */
-  }
 
-  /* Adjust submit button */
   .signup-next-button {
-    width: 100%; /* Match input width */
-    max-width: 400px; /* Cap width */
-    padding: 0.75rem; /* Reduced padding */
-    display:flex;
-
-    justify-content: center; /* Center button */
-    align-items: center; /* Center text */
-    margin: 0.5rem auto; /* Centered with reduced margin */
-    border-radius: 20px; /* Smaller radius */
-    /* Smaller radius */ /* Slightly smaller radius */
-    font-size: 0.9rem; /* Smaller font size */
+    width: 100%;
+    max-width: 400px;
+    padding: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem auto 1rem auto;
+    border-radius: 20px;
+    font-size: 0.9rem;
   }
 
-  /* Adjust social icons section */
- .signup-social-icons {
-    width: 80%; /* Slightly narrower than desktop */
-    margin: 0rem auto; /* Slightly reduced margin */
-    max-width: 500px; /* Match base style cap */
+  .signup-social-icons {
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem auto 0 auto;
+    text-align: center;
+    align-items: center;
   }
 
-  .signup-login-text {
-    text-align: center; /* Ensure centered */
-    font-size: 16px; /* Match base style */
-    margin: 0; /* Remove margins */
+  .signup-social-icons span {
+    font-size: 16px;
+    margin-bottom: 10px;
   }
 
   .signup-social-icons-icons {
-    gap: 15px; /* Slightly reduced gap */
-    justify-content: center; /* Ensure centered */
-    margin: 0rem 0; /* Minimal vertical margin */
+    gap: 15px;
+    justify-content: center;
   }
 
   .signup-social-icons-icons img {
-    width: 40px; /* Match base style */
+    width: 40px;
     height: 40px;
   }
 
   .signup-divider-with-text {
-    width: 80%; /* Match social icons width */
-    max-width: 500px; /* Match base style */
-    margin: 0.3rem auto; /* Slightly reduced margin */
-    margin-bottom:0;
-    gap: 10px; /* Slightly reduced gap */
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem auto 0.5rem auto;
+    gap: 10px;
   }
 
   .signup-line {
-    width: 100% !important; /* Full width for lines */
+    width: 100%;
   }
 
+  .signup-or-text {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .signup-login-text {
+    text-align: center;
+    font-size: 16px;
+    margin: 1rem auto;
+  }
+
+  /* ✅ Centered label4 */
   .signup-label4 {
-    margin: 0; /* Slightly reduced margin */
-    margin-top:0.1rem;
-    text-align: center; /* Ensure centered */
-    font-size: 16px; /* Match base style */
+    text-align: center;
+    font-size: 16px;
+    margin: 0.5rem auto 0 auto;
   }
 
   .signup-label4 span {
     margin-left: 5px;
   }
+
+  .error-fields {
+    text-align: center;
+    margin: 0.25rem auto;
+  }
 }
+

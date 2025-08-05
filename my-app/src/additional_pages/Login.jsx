@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
@@ -21,49 +21,68 @@ function Login() {
     return regex.test(pwd);
   };
 
+  const handleForgotPass = async () => {
+    if (!email) {
+      toast.error('Please enter your email first');
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      toast.error('Please enter a valid Email.');
+      return;
+    }
+    try {
+      const response = await fetch(`${baseURL}/users/password-reset-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error();
+      }
+      toast.success('Password reset link sent to your email!');
+      setEmail('');
+    } catch (error) {
+      toast.error('Error sending reset link. Please try again later.');
+      return;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!email || !password) {
       toast.error('Please fill in both email and password.');
       return;
     }
-
     if (!email.includes('@') || !email.includes('.')) {
       toast.error('Please enter a valid email.');
       return;
     }
-
     if (!isPasswordValid(password)) {
       toast.error('Password must be at least 8 characters long.');
       return;
     }
-
     setIsSubmitting(true);
     const loadingToast = toast.loading('Logging in...');
-
     try {
       const response = await fetch(`${baseURL}/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data?.message || data?.error || 'Something went wrong!');
       }
-
       if (data.status === 'success' && data.token) {
         localStorage.setItem('token', data.token);
-        
         toast.success('Login successful!');
         toast.dismiss(loadingToast);
-
-        if(data.userType === 'vendor') {
+        if (data.userType === 'vendor') {
           navigate('/vendor/dashboard');
-        } else if(data.userType === 'hoster') {
+        } else if (data.userType === 'hoster') {
           navigate('/hoster/dashboard');
         }
       } else {
@@ -79,7 +98,7 @@ function Login() {
 
   return (
     <div className="login-vendor-card">
-      <div className="login-left-bg" style={{ backgroundImage: `url(${bgpic})` }}>
+      <div className="login-left-bg">
         <div className="login-text-group">
           <h1>Sign In to Your Account</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins as well.</p>
@@ -88,9 +107,8 @@ function Login() {
       <form className="login-vendor-info" onSubmit={handleSubmit}>
         <div className="login-title-group">
           <h1>Sign In to Your Account</h1>
-          <p>Sign in to manage your profile and services.</p>
+          <p>Sign in right now to manage your profile and services.</p>
         </div>
-
         {/* Email Field */}
         <div className="login-password-container">
           <label className="login-label1">Email</label>
@@ -105,10 +123,12 @@ function Login() {
             required
           />
         </div>
-
         {/* Password Field */}
         <div className="login-password-container">
           <label className="login-label1">Password</label>
+          <label className="login-label2" onClick={handleForgotPass} style={{ cursor: 'pointer' }}>
+            Forgot Password?
+          </label>
         </div>
         <div className="login-input-wrapper">
           <input
@@ -127,7 +147,6 @@ function Login() {
             {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
           </span>
         </div>
-
         <button
           type="submit"
           className="login-next-button"
@@ -135,11 +154,11 @@ function Login() {
         >
           {isSubmitting ? 'Logging in...' : 'Sign In'}
         </button>
-
         <div className="login-social-icons">
           <span className="login-login-text">
             Don't Have An Account? Sign Up as {' '}
-            <a href="/vendor/signup" style={{color:'#BE0000'}}>Vendor</a>{' '}/{' '}<a href="/hoster/signup" style={{color:'#BE0000'}}>Host</a>
+            <a href="/vendor/signup" style={{ color: '#BE0000' }}>Vendor</a>{' '}/{' '}
+            <a href="/hoster/signup" style={{ color: '#BE0000' }}>Host</a>
           </span>
           <div className="login-divider-with-text">
             <span className="login-line"></span>

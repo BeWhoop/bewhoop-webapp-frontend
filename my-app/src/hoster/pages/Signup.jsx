@@ -103,7 +103,7 @@ const Signup = () => {
 
   return (
     <div className="signup1-vendor-card">
-      <div className="signup1-left-bg" style={{ backgroundImage: `url(${signup})` }}>
+      <div className="signup1-left-bg">
         <div className="signup1-text-group">
           <h1>Connect with Hosts</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
@@ -113,7 +113,7 @@ const Signup = () => {
       <form className="signup1-vendor-info" onSubmit={handleSubmit}>
         <div className="signup1-title-group">
           <h1>Join as an Event Host</h1>
-          <p>Create an account to join as a host</p>
+          <p>Create an new account today to join as a host</p>
         </div>
 
         <label className="signup1-label1">Full Name</label>
@@ -136,7 +136,6 @@ const Signup = () => {
 
         <div className="signup1-password-container">
           <label className="signup1-label1">Password</label>
-          <label className="signup1-label2" onClick={handlePassChange} style={{ cursor: 'pointer' }}>Forgot Password?</label>
         </div>
 
         <input

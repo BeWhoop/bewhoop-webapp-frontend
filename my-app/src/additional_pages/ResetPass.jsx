@@ -78,7 +78,7 @@ function ResetPass() {
 
   return (
     <div className="reset-vendor-card">
-      <div className="reset-left-bg" style={{ backgroundImage: `url(${bgpic})` }}>
+      <div className="reset-left-bg">
         <div className="reset-text-group">
           <h1>Reset your password</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins as well.</p>
@@ -88,7 +88,7 @@ function ResetPass() {
       <form className="reset-vendor-info" onSubmit={handleSubmit}>
         <div className="reset-title-group">
           <h1>Reset Your Password</h1>
-          <p>Create a new password to secure your account.</p>
+          <p>Create a new password to secure account</p>
         </div>
 
         {/* Password Field */}
