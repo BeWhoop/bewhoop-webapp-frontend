@@ -53,7 +53,7 @@ function VendorProfile() {
 
   return (
     <div className="vp-container">
-      <div className="vp-left" style={{ backgroundImage: `url(${bg})` }}>
+      <div className="vp-left">
         <div className="vp-text-group">
           <h1>Get A Vendor Profile</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
