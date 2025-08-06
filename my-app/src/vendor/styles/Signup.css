@@ -26,7 +26,7 @@ html, body {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .signup-left-bg {
@@ -282,7 +282,7 @@ html, body {
     margin-left: 0;
     align-items: center;
     text-align: center;
-    margin-top: 0.2rem;
+    margin-top: 0;
   }
 
   .signup-title-group h1 {
@@ -342,7 +342,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1.5rem auto 1rem auto;
+    margin: 0.5rem auto 1rem auto;
     border-radius: 20px;
     font-size: 0.9rem;
   }
@@ -350,14 +350,14 @@ html, body {
   .signup-social-icons {
     width: 100%;
     max-width: 400px;
-    margin: 1rem auto 0 auto;
+    margin: 0 auto 0 auto;
     text-align: center;
     align-items: center;
   }
 
   .signup-social-icons span {
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .signup-social-icons-icons {
@@ -366,14 +366,14 @@ html, body {
   }
 
   .signup-social-icons-icons img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
 
   .signup-divider-with-text {
     width: 100%;
     max-width: 400px;
-    margin: 1rem auto 0.5rem auto;
+    margin: 0.4rem auto 0 auto;
     gap: 10px;
   }
 
@@ -389,14 +389,14 @@ html, body {
   .signup-login-text {
     text-align: center;
     font-size: 16px;
-    margin: 1rem auto;
+    margin: 0 auto 0 auto;
   }
 
   /* ✅ Centered label4 */
   .signup-label4 {
     text-align: center;
     font-size: 16px;
-    margin: 0.5rem auto 0 auto;
+    margin: 0 auto 0 auto;
   }
 
   .signup-label4 span {

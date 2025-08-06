@@ -311,7 +311,7 @@ html, body {
   .login-divider-with-text {
     width: 100%;
     max-width: 400px;
-    margin: 1rem auto 0.5rem auto;
+    margin: 0.3rem auto 0 auto;
     gap: 10px;
   }
   .login-line {
@@ -324,7 +324,7 @@ html, body {
   .login-login-text {
     text-align: center;
     font-size: 16px;
-    margin: 1rem auto;
+    margin: 0 auto;
   }
   .login-login-text a {
     font-size: 16px;
