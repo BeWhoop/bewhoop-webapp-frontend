@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from '../additional_components/Sidebar';
 import Header from '../additional_components/Header';
 import '../styles/EventDetails.css';
-import toast from 'react-hot-toast'; // ✅ Import toast
+import toast from 'react-hot-toast';
 
 const EventDetails = () => {
   const { state } = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const event = state?.event;
   const navigate = useNavigate();
 
   if (!event) {
-    toast.error('No event data found!'); // ✅ Toast error when event is missing
-
+    toast.error('No event data found!');
     return (
       <div className="event-details-wrapper">
-        <Sidebar />
+        {isSidebarOpen && <Sidebar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />}
         <div className="event-main">
-          <Header />
-          <div className="event-details-container">
+          <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} isSidebarOpen={isSidebarOpen} />
+          <div className="event-content">
             <p>No event data found.</p>
           </div>
         </div>
@@ -26,23 +26,14 @@ const EventDetails = () => {
     );
   }
 
-  const {
-    title,
-    description,
-    location,
-    event_type,
-    created_at,
-    categories,
-    attendee_count,
-    media
-  } = event;
+  const { title, description, location, event_type, created_at, categories, attendee_count, media } = event;
 
   return (
     <div className="event-details-wrapper">
-      <Sidebar />
+      {isSidebarOpen && <Sidebar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />}
       <div className="event-main">
-        <Header />
-        <div className="event-details-container">
+        <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} isSidebarOpen={isSidebarOpen} />
+        <div className="event-content">
           <button onClick={() => navigate(-1)} className="back-button">← Back</button>
 
           <h1 className="event-title">{title}</h1>
@@ -59,9 +50,7 @@ const EventDetails = () => {
           <h3 className="media-heading">Media Gallery</h3>
           <div className="media-gallery">
             {media?.length > 0 ? (
-              media.map((url, i) => (
-                <img key={i} src={url} alt={`event-media-${i}`} className="media-item" />
-              ))
+              media.map((url, i) => <img key={i} src={url} alt={`event-media-${i}`} className="media-item" />)
             ) : (
               <p className="no-media">No media available</p>
             )}

@@ -101,17 +101,24 @@
 
 @media (max-width: 1024px) {
   .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 600px) {
+
+  .main-content Header {
+    padding: 10px 12px;
+    flex-direction: row;
+    align-items: flex-start;
+
+  }
   .scrollable {
     padding: 20px;
   }
 
   .portfolio-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .portfolio-image,

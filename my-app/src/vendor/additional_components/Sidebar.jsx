@@ -8,10 +8,11 @@ import {
   FaRegUser,
   FaGears,
   FaUnlock,
+  FaXmark
 } from 'react-icons/fa6'; 
 import './Sidebar.css';
 
-function Sidebar() {
+function Sidebar({ toggleSidebar }) {
   const location = useLocation();
   const navigate = useNavigate();
   const currentPath = location.pathname;
@@ -29,7 +30,7 @@ function Sidebar() {
       localStorage.removeItem('user'); // optional
       await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate delay
       toast.success('Logged out successfully.');
-      navigate('/vendor/signup');
+      navigate('/');
     } catch (err) {
       console.error(err);
       toast.error('Logout failed.');
@@ -41,8 +42,13 @@ function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <div className="logo">
-        <img src={logo} alt="Company Logo" />
+      <div className="sidebar-header">
+        <button onClick={toggleSidebar} className="sidebar-close">
+          <FaXmark size={24} />
+        </button>
+        <div className="logo">
+          <img src={logo} alt="Company Logo" />
+        </div>
       </div>
 
       <div className="nav-links">

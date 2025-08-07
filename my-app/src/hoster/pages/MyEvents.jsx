@@ -11,6 +11,10 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 const MyEvents = () => {
   const [events, setEvents] = useState([]);
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+};
 
   // ✅ Fetch events from backend
   const fetchEvents = async () => {
@@ -46,7 +50,7 @@ const MyEvents = () => {
     fetchEvents();
     
     // Dummy data used previously for UI testing
-    /*
+    
     const dummyEvents = [
       {
         id: '1',
@@ -86,14 +90,14 @@ const MyEvents = () => {
       }
     ];
     setEvents(dummyEvents);
-    */
+    
   }, []);
 
   return (
     <div className="my-events-container">
-      <Sidebar />
+{isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div className="my-events-main">
-        <Header />
+<Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="my-events-content">
           <h2 className="my-events-title">My Events</h2>
           <div className="events-grid">
@@ -101,7 +105,7 @@ const MyEvents = () => {
               <div
                 key={i}
                 className="event-card"
-                onClick={() => navigate('/hoster/pages/EventDetails', { state: { event } })}
+                onClick={() => navigate('/event-details', { state: { event } })}
               >
                 <img
                   src={event.media?.[0] || placeholderImage}

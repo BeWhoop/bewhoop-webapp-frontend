@@ -23,6 +23,11 @@ function EditServices() {
       : []
   );
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   const availableEvents = ['Photography', 'Decoration', 'Catering'];
 
   const handleAddEvent = (e) => {
@@ -92,9 +97,9 @@ function EditServices() {
 
   return (
     <div className="editservices-dashboard-container">
-      <Sidebar />
+      {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div className="editservices-main-content">
-        <Header />
+        <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="editservices-scrollable">
           <form ref={formRef} onSubmit={handleSave}>
             <div className="editservices-form-wrapper">

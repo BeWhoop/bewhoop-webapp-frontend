@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext,useState, useEffect } from 'react';
 import { VendorContext } from '../contexts/VendorContext.jsx';
 import '../styles/Dashboard.css';
 import Header from '../additional_components/Header';
@@ -7,6 +7,11 @@ import toast from 'react-hot-toast';
 
 function Dashboard() {
   const { vendorData } = useContext(VendorContext);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   useEffect(() => {
     if (!vendorData?.profileImage) {
@@ -19,10 +24,10 @@ function Dashboard() {
 
   return (
     <div className="dash-container">
-      <Sidebar />
+      {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
 
       <div className="dash-main">
-        <Header />
+        <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
 
         <div className="dash-body">
           {vendorData?.profileImage ? (

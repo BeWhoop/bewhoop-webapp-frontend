@@ -18,6 +18,12 @@ function EditPortfolio() {
   const navigate = useNavigate();
   const formRef = useRef(null);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -83,9 +89,9 @@ function EditPortfolio() {
 
   return (
     <div className="editportfolio-dashboard-container">
-      <Sidebar />
+      {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div className="editportfolio-main-content">
-        <Header />
+        <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="editportfolio-scrollable">
           <form ref={formRef} onSubmit={handleSubmit}>
             <div className="editportfolio-form-wrapper">
@@ -113,7 +119,11 @@ function EditPortfolio() {
                 />
               </div>
             </div>
+            
+            <div className="editportfolio-form-wrapper">
 
+            <label className="editportfolio-label3">Upload Portfolio</label>
+            </div>
             <div className="editportfolio-upload">
               <FileUploadSplit />
             </div>

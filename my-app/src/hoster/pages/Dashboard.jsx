@@ -8,15 +8,19 @@ import '../styles/Dashboard.css'
 
 function Dashboard() {
   const [search, setSearch] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
     <div className="dashboard-container">
-      <Sidebar />
-      <div className="dashboard-main-content">
-        <Header />
+      {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
+      <div className={`dashboard-main-content ${isSidebarOpen ? '' : 'full-width'}`}>
+        <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="dashboard-scrollable">
           <div className="dashboard-wrapper">
-
             <div className="dashboard-filters">
               <select className="dashboard-select">
                 <option>Carnival Festival</option>
@@ -44,25 +48,24 @@ function Dashboard() {
                   <p className="dashboard-views-count">10,000</p>
                 </div>
                 <div className="dashboard-metric">
-                    <p>Click Through Rate</p>
-                    <p className="dashboard-views-count">45%</p>
-                  </div>
-                  <div className="dashboard-metric">
-                    <p>Conversion Rate</p>
-                    <p className="dashboard-views-count">10%</p>
-                  </div>
-                  <div className="dashboard-metric">
-                    <p>Attendees</p>
-                    <p className="dashboard-views-count">10,000</p>
-                  </div>
-                  <div className="dashboard-metric">
-                    <p>Tickets Sold</p>
-                    <p className="dashboard-views-count">456</p>
-                  </div>
+                  <p>Click Through Rate</p>
+                  <p className="dashboard-views-count">45%</p>
                 </div>
+                <div className="dashboard-metric">
+                  <p>Conversion Rate</p>
+                  <p className="dashboard-views-count">10%</p>
+                </div>
+                <div className="dashboard-metric">
+                  <p>Attendees</p>
+                  <p className="dashboard-views-count">10,000</p>
+                </div>
+                <div className="dashboard-metric">
+                  <p>Tickets Sold</p>
+                  <p className="dashboard-views-count">456</p>
+                </div>
+              </div>
             </div>
-
-
+ {/*
             <div className="dashboard-events">
               <div className="dashboard-events-header">
                 <h3>Events</h3>
@@ -114,7 +117,7 @@ function Dashboard() {
                 <button>Next &gt;</button>
               </div>
             </div>
-
+              */}
           </div>
         </div>
       </div>

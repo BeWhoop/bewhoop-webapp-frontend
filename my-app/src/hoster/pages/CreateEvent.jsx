@@ -14,6 +14,7 @@ function CreateEvent() {
   const baseURL = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
   const { hosterData, setHosterData } = useContext(HosterContext);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const [editingField, setEditingField] = useState(null);
   const [ticketed, setTicketed] = useState(false);
@@ -116,7 +117,9 @@ function CreateEvent() {
       </h2>
     );
   };
-
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   const handleEditTicket = (ticket) => {
     setEditMode(true);
     setEditTicketId(ticket.id);
@@ -277,9 +280,9 @@ function CreateEvent() {
 
   return (
     <div className="create-dashboard-container">
-      <Sidebar />
+          {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div className="create-main-content">
-        <Header />
+            <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="create-edit-profile-scrollable">
           <form
             id="form1"

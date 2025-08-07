@@ -11,11 +11,12 @@ import {
   FaRegUser,
   FaGears,
   FaUnlock,
+  FaXmark
 } from 'react-icons/fa6';
 import './Sidebar.css';
-import toast from 'react-hot-toast'; // ✅ Import toast
+import toast from 'react-hot-toast';
 
-function Sidebar() {
+function Sidebar({ toggleSidebar }) {
   const { setHosterData } = useContext(HosterContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,24 +25,24 @@ function Sidebar() {
   const isActive = (path) => currentPath === path;
 
   const handleLogout = () => {
-    const toastId = toast.loading('Logging out...'); // ✅ Toast loading
-
+    const toastId = toast.loading('Logging out...');
     setTimeout(() => {
-      // Clear context
       setHosterData({});
-      // Remove token
       localStorage.removeItem('token');
-      // Success message
       toast.success('Logged out successfully.', { id: toastId });
-      // Redirect to home/login
       navigate('/');
-    }, 1200); // Simulated logout delay
+    }, 1200);
   };
 
   return (
     <aside className="sidebar">
-      <div className="logo">
-        <img src={logo} alt="Company Logo" />
+      <div className="sidebar-header">
+        <button onClick={toggleSidebar} className="sidebar-close">
+          <FaXmark size={24} />
+        </button>
+        <div className="logo">
+          <img src={logo} alt="Company Logo" />
+        </div>
       </div>
 
       <div className="nav-links">
@@ -114,7 +115,6 @@ function Sidebar() {
             <a>Settings</a>
           </li>
 
-          {/* Fixed: call handleLogout onClick */}
           <li className="nav-item" onClick={handleLogout}>
             <FaUnlock className="nav-icon" />
             <a>Logout</a>

@@ -2,13 +2,17 @@ import '../styles/Profile.css';
 import Sidebar from '../additional_components/Sidebar';
 import Header from '../additional_components/Header';
 import defaultImage from '../assets/UploadPic.png';
-import { useContext, useRef } from 'react';
+import { useContext,useState, useRef } from 'react';
 import { HosterContext } from '../contexts/HosterContext.jsx';
 import toast from 'react-hot-toast'; // ✅ Import toast
 
 function Profile() {
   const { hosterData, setHosterData } = useContext(HosterContext);
   const fileInputRef = useRef(null);
+const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+};
 
   const handlePhotoSelect = (e) => {
     const file = e.target.files[0];
@@ -39,10 +43,10 @@ function Profile() {
 
   return (
     <div className="dashboard-container">
-      <Sidebar />
+{isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
 
       <div className="main-content">
-        <Header />
+<Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
 
         <div className="scrollable">
           <div className="dashboard-body">

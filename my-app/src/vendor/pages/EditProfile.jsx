@@ -12,6 +12,12 @@ function EditProfile() {
   const navigate = useNavigate();
   const formRef = useRef(null);
   const fileInputRef = useRef(null);
+  
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   const [description, setDescription] = useState(vendorData?.description || '');
   const [profilePreview, setProfilePreview] = useState(vendorData?.profileImage || null);
@@ -60,9 +66,9 @@ function EditProfile() {
 
   return (
     <div className="editprofile-dashboard-container">
-      <Sidebar />
+      {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div className="editprofile-main-content">
-        <Header />
+        <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="editprofile-scrollable">
           <form ref={formRef} onSubmit={handleSave}>
             <div className="editprofile-form-wrapper">

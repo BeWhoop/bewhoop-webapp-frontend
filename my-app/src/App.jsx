@@ -71,28 +71,26 @@ function App() {
             {/* ─── Hoster Routes ─── */}
             
             <Route path="/hoster/setup" element={<HosterSetup />} />
-            <Route path="/create-event" element={<HosterProtectedRoute><CreateEvent /></HosterProtectedRoute>} />
-            <Route path="/event-tickets" element={<HosterProtectedRoute><EventTickets /></HosterProtectedRoute>} />
-            <Route path="/bank-details" element={<HosterProtectedRoute><BankDetails /></HosterProtectedRoute>} />
-            <Route path="/hoster/dashboard" element={<HosterProtectedRoute><HosterDashboard /></HosterProtectedRoute>} />
-            <Route path="/marketplace" element={<HosterProtectedRoute><VendorMarketplace /></HosterProtectedRoute>} />
-            <Route path="/marketplace/profile" element={<HosterProtectedRoute><VenProfile /></HosterProtectedRoute>} />
-            <Route path="/event-details" element={<HosterProtectedRoute><EventDetails /></HosterProtectedRoute>} />
-            <Route path="/my-events" element={<HosterProtectedRoute><MyEvents /></HosterProtectedRoute>} />
-            <Route path="/hoster/profile" element={<HosterProtectedRoute><HosterProfile /></HosterProtectedRoute>} />
-            <Route path="/hoster/messages" element={<HosterProtectedRoute><HosterPlaceholder /></HosterProtectedRoute>} />
-            <Route path="/hoster/settings" element={<HosterProtectedRoute><HosterPlaceholder /></HosterProtectedRoute>} />
+            <Route path="/create-event" element={<CreateEvent />} />
+            <Route path="/hoster/dashboard" element={<HosterDashboard/>} />
+            <Route path="/marketplace" element={<VendorMarketplace />} />
+            <Route path="/marketplace/profile" element={<VenProfile />} />
+            <Route path="/event-details" element={<EventDetails />} />
+            <Route path="/my-events" element={<MyEvents />} />
+            <Route path="/hoster/profile" element={<HosterProfile />} />
+            <Route path="/hoster/messages" element={<HosterPlaceholder />} />
+            <Route path="/hoster/settings" element={<HosterPlaceholder />} />
 
             {/* ─── Vendor Routes ─── */}
             <Route path="/vendor/profile" element={<VendorProfile />} />
             <Route path="/vendor/setup" element={<VendorSetup />} />
             <Route path="/upload-portfolio" element={<UploadPortfolio />} />
-            <Route path="/vendor/dashboard" element={<VendorProtectedRoute><VendorDashboard /></VendorProtectedRoute>} />
-            <Route path="/vendor/edit-profile" element={<VendorProtectedRoute><EditProfile /></VendorProtectedRoute>} />
-            <Route path="/vendor/edit-services" element={<VendorProtectedRoute><EditServices /></VendorProtectedRoute>} />
-            <Route path="/vendor/edit-portfolio" element={<VendorProtectedRoute><EditPortfolio /></VendorProtectedRoute>} />
-            <Route path="/vendor/messages" element={<VendorProtectedRoute><VendorPlaceholder /></VendorProtectedRoute>} />
-            <Route path="/vendor/settings" element={<VendorProtectedRoute><VendorPlaceholder /></VendorProtectedRoute>} />
+            <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+            <Route path="/vendor/edit-profile" element={<EditProfile />} />
+            <Route path="/vendor/edit-services" element={<EditServices />} />
+            <Route path="/vendor/edit-portfolio" element={<EditPortfolio />} />
+            <Route path="/vendor/messages" element={<VendorPlaceholder />} />
+            <Route path="/vendor/settings" element={<VendorPlaceholder />} />
           </Routes>
         </BrowserRouter>
       </VendorProvider>

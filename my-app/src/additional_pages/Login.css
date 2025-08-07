@@ -85,24 +85,29 @@ html, body {
   color: #202224;
   margin-top: 1.5rem;
   margin-bottom: 2rem;
-}
-.login-password-container {
+
+}.login-password-container {
   width: 80%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-left: 2rem;
 }
+
 .login-label1 {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 16px;
   color: #202224;
-  margin: 0.8rem 0 1rem 0;
+  margin: 0;
 }
+
 .login-label2 {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 16px;
   color: #8A8B8C;
-  margin: 1rem 2rem 1rem 2rem;
+  margin: 0;
+  text-align: right;
+  white-space: nowrap;
 }
 .login-input-wrapper {
   position: relative;
@@ -258,7 +263,6 @@ html, body {
   .login-label2 {
     text-align: center;
     font-size: 14px;
-    margin: 0.5rem 0 1rem 0;
   }
   .login-password-container {
     width: 100%;

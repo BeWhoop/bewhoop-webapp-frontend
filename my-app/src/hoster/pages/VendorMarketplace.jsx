@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import debounce from 'lodash/debounce';
-import toast from 'react-hot-toast'; // ✅ Import toast
+import toast from 'react-hot-toast';
 import Sidebar from '../additional_components/Sidebar';
 import Header from '../additional_components/Header';
 import VendorCard from '../additional_components/VendorCard.jsx';
@@ -11,10 +11,54 @@ import placeholderImage from '../assets/placeholder-image.png';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
+// Sample vendor list for fallback when API fetch fails
+const sampleVendors = [
+  {
+    id: 1,
+    full_name: "Ali's Catering",
+    services: ["Catering", "Event Planning"],
+    city: "Islamabad",
+    budget_range: "$500 - $2000",
+  },
+  {
+    id: 2,
+    full_name: "Zara Decor",
+    services: ["Decoration", "Floral Arrangements"],
+    city: "Lahore",
+    budget_range: "$300 - $1500",
+  },
+  {
+    id: 3,
+    full_name: "Khan Photography",
+    services: ["Photography", "Videography"],
+    city: "Karachi",
+    budget_range: "$400 - $1800",
+  },
+  {
+    id: 4,
+    full_name: "Sana Events",
+    services: ["Event Management", "Lighting"],
+    city: "Rawalpindi",
+    budget_range: "$600 - $2500",
+  },
+  {
+    id: 5,
+    full_name: "Bilal Music",
+    services: ["DJ Services", "Live Band"],
+    city: "Islamabad",
+    budget_range: "$200 - $1000",
+  },
+];
+
 const VendorMarketplace = () => {
   const [vendors, setVendors] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   const fetchVendors = async (query = '') => {
     try {
@@ -35,14 +79,14 @@ const VendorMarketplace = () => {
       setVendors(result.vendors || []);
     } catch (error) {
       console.error('Error fetching vendors:', error);
-      toast.error('Failed to fetch vendors'); // ✅ Toast error on failure
+      toast.error('Failed to fetch vendors');
     }
   };
 
   const debouncedFetchVendors = useCallback(debounce(fetchVendors, 500), []);
 
   useEffect(() => {
-    fetchVendors(); // initial fetch
+    fetchVendors();
   }, []);
 
   const handleSearchChange = (e) => {
@@ -53,9 +97,9 @@ const VendorMarketplace = () => {
 
   return (
     <div className="vendor-dashboard-container">
-      <Sidebar />
+      {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div className="vendor-main-content">
-        <Header />
+        <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="vendor-scrollable">
           <div className="vendor-wrapper">
             <div className="vendor-topbar">
@@ -73,7 +117,7 @@ const VendorMarketplace = () => {
             </div>
 
             <div className="vendor-grid">
-              {vendors.map((vendor, i) => (
+              {(vendors.length > 0 ? vendors : sampleVendors).map((vendor, i) => (
                 <VendorCard
                   key={i}
                   vendor={{

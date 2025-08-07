@@ -75,14 +75,14 @@
 
 
 .editportfolio-form-wrapper {
-  
-  max-width: 600px;
+  max-width: 750px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
- margin-top:1rem;
-  margin-left: 21rem;
-  margin-right: 40px;
+  align-items: center;
+  text-align: center;
 }
 
 /* Labels */
@@ -93,11 +93,18 @@
   margin-bottom: 5px;
 }
 
+.editportfolio-label3 {
+  font-family: 'BricolageGrotesque-Bold', sans-serif;
+  font-size: 24px;
+  color: #060606;
+  margin-top: 3rem !important;
+  align-self: flex-start;
+}
+
 .editprofile-label1,
 .editprofile-label2,
 .editprofile-label3,
-.editportfolio-label1,
-.editportfolio-label3 {
+.editportfolio-label1 {
   
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 24px;
@@ -110,12 +117,9 @@
   margin-left: 80px;
   margin-right: 40px;
 }
-
 .editportfolio-upload {
-  max-width:750px;
- margin-top:2rem;
-  margin-left: 20rem;
-  margin-right: 40px;
+  max-width: 750px;
+  margin: 3rem auto 0;
 }
 
 .editprofile-upload-circle {
@@ -223,11 +227,11 @@ select:focus {
   width: 100%;
   max-width: 400px;
   height: auto;
-  margin-top: 10px;
+  margin: 10px auto 0;
   border-radius: 8px;
   border: 1px solid #ccc;
+  display: block;
 }
-
 .editservices-select-input,
 .editservices-simple-input {
   width: 100%;
@@ -264,44 +268,18 @@ select:focus {
   display: flex;
   justify-content: center;
 }
-.editservices-save-button{
-
-  background-color: #BE0000;
-  color: white;
-  padding: 1rem 8rem;
-  border: none;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  font-family: 'BricolageGrotesque-Bold', sans-serif;
-  margin-top: 2rem;
-  margin-right:4rem;
-}
-.editportfolio-save-button {
-  background-color: #BE0000;
-  color: white;
-  padding: 1rem 8rem;
-  border: none;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  font-family: 'BricolageGrotesque-Bold', sans-serif;
-  margin-top: 10rem;
-  margin-right:4rem;
-}
-
+.editservices-save-button,
+.editportfolio-save-button,
 .editprofile-save-button {
-  
-  background-color: #BE0000;
+  background-color: #be0000;
   color: white;
-  padding: 1rem 8rem;
+  padding: 1rem 14rem;
   border: none;
   border-radius: 30px;
   font-size: 1rem;
   cursor: pointer;
-  font-family: 'BricolageGrotesque-Bold', sans-serif;
-  margin-top: 10rem;
-  margin-right:4rem;
+  font-family: inherit;
+  margin-top: 2rem;
 }
 .editprofile-save-button:hover,
 .editservices-save-button:hover,
@@ -350,4 +328,16 @@ select:focus {
   .editportfolio-input-range {
     width: 100%;
   }
+
+.editportfolio-save-button {
+  background-color: #be0000;
+  color: white;
+  padding: 1rem 5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 2rem;
+}
 }

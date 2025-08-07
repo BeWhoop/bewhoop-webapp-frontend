@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: 'BricolageGrotesque-Medium';
   src: url('../assets/BricolageGrotesque-Medium.ttf') format('truetype');
@@ -21,61 +20,42 @@
   height: 60px;
   background-color: #FFFFFF;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  border-bottom: 1px solid #9e9e9e;
+  padding: 0 16px;
+  border-bottom: 1px solid #ccc;
   font-family: 'NunitoSans', sans-serif;
+  gap: 10px;
+  flex-wrap: nowrap;
 }
 
-.header-left {
+.sidebar-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
   display: flex;
   align-items: center;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;  
-  gap: 20px;       
+  flex-shrink: 0;
 }
 
 .search-input {
-    margin-left: 40px;
-  padding: 8px 100px;
+  flex: 1;
+  max-width: 400px;
+  padding: 8px 16px;
   border-radius: 20px;
   background-color: #F5F6FA;
   border: 1px solid #ccc;
   outline: none;
   font-family: 'NunitoSans', sans-serif;
-}
-
-.header-icon {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-}
-
-.language-selector {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 10px;
-  padding: 6px 10px;
-  cursor: pointer;
-  background-color: white;
-  font-family: 'NunitoSans', sans-serif;
-}
-
-.flag-icon {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
+  margin: 0 10px;
 }
 
 .user-info {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .user-photo {
@@ -90,63 +70,50 @@
   color: #202224;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 16px;
+    white-space: nowrap;
+    margin-right: 8px;
+  }
+
   .search-input {
-    padding: 8px 60px;
-    margin-left: 20px;
+    flex: 1;
+    max-width: 130px;
+    min-width: 0;
+    padding: 6px 10px;
+    font-size: 13px;
   }
 
   .user-name {
-    font-size: 14px;
-  }
-
-  .language-selector {
-    padding: 4px 8px;
-  }
-
-  .flag-icon {
-    width: 24px;
-    height: 24px;
+    display: none;
   }
 
   .user-photo {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .header-left,
-  .header-right {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 8px 16px;
-    margin-left: 0;
-  }
-
-  .header-right {
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-end;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
   }
 
   .language-selector {
     font-size: 12px;
+    padding: 4px 6px;
+    flex-shrink: 0;
   }
 
-  .user-name {
-    display: none; 
+  .header-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
   }
 }
