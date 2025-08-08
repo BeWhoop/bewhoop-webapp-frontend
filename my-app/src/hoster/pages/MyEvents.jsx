@@ -20,7 +20,6 @@ const toggleSidebar = () => {
   const fetchEvents = async () => {
     try {
       const token = localStorage.getItem('token');
-      console.log("🔐 Token:", token);
 
       const response = await fetch(`${baseURL}/events`, {
         headers: {
@@ -29,10 +28,8 @@ const toggleSidebar = () => {
         }
       });
 
-      console.log("📡 Response Status:", response.status);
 
       const result = await response.json();
-      console.log("📦 Response Body:", result);
 
       if (!response.ok) {
         toast.error('Failed to fetch events'); // ✅ Toast for failed response
@@ -41,7 +38,6 @@ const toggleSidebar = () => {
 
       setEvents(result.events || []);
     } catch (error) {
-      console.error('❌ Error fetching events:', error.message);
       toast.error('Error fetching events'); // ✅ Toast for catch block
     }
   };
