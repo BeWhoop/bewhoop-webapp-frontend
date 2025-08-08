@@ -27,7 +27,6 @@ html, body {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
 }
 .login-left-bg {
   flex: 1;
@@ -102,6 +101,7 @@ html, body {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 16px;
   color: #202224;
+  margin-top:2rem;
 }
 .login-label2 {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
@@ -155,7 +155,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 5rem;
   gap: 10px;
 }
 .login-social-icons span {
@@ -223,6 +223,16 @@ html, body {
     margin-left: 0;
     margin-right: 0;
   }
+
+  .login-label1{
+    
+    margin-top:0;
+  }
+
+  .login-social-icons{
+    
+      margin-top: 3rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -232,6 +242,15 @@ html, body {
   .login-simple-input { font-size: 16px; padding: 0.6rem; }
   .login-next-button { padding: 0.7rem; font-size: 0.9rem; }
   .login-social-icons-icons img { width: 36px; height: 36px; }
+
+  .login-label1{
+    
+    margin-top:0;
+  }
+  .login-social-icons{
+    
+      margin-top: 3rem;
+  }
 }
 
 @media (max-width: 400px) {
@@ -240,5 +259,14 @@ html, body {
   .login-input-wrapper,
   .login-password-container {
     max-width: 100%;
+  }
+
+  .login-label1{
+    
+    margin-top:0;
+  }
+  .login-social-icons{
+    
+      margin-top: 3rem;
   }
 }
