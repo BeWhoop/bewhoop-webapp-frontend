@@ -9,7 +9,7 @@ import VendorCard from '../additional_components/VendorCard.jsx';
 import '../styles/VendorMarketplace.css';
 import placeholderImage from '../assets/placeholder-image.png';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 
 // Sample vendor list for fallback when API fetch fails
 const sampleVendors = [

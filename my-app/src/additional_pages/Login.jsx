@@ -13,7 +13,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
+  const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
   const navigate = useNavigate();
 
   const isPasswordValid = (pwd) => {
@@ -31,7 +31,7 @@ function Login() {
       return;
     }
     try {
-      const response = await fetch(`${baseURL}/users/password-reset-email`, {
+      const response = await fetch(`${baseURL}/users/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,11 +80,8 @@ function Login() {
         localStorage.setItem('token', data.token);
         toast.success('Login successful!');
         toast.dismiss(loadingToast);
-        if (data.userType === 'vendor') {
-          navigate('/vendor/dashboard');
-        } else if (data.userType === 'hoster') {
-          navigate('/hoster/dashboard');
-        }
+        
+        navigate('/hoster/dashboard');
       } else {
         throw new Error('Login failed.');
       }
@@ -125,7 +122,7 @@ function Login() {
         </div>
         {/* Password Field */}
         <div className="login-password-container">
-          <label className="login-label1">Password</label>
+          <label className="login-label1" style={{marginBottom:'1rem'}}>Password</label>
           <label className="login-label2" onClick={handleForgotPass} style={{ cursor: 'pointer' }}>
             Forgot Password?
           </label>

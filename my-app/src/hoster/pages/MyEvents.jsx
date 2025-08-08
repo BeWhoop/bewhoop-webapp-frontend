@@ -6,7 +6,7 @@ import '../styles/MyEvents.css';
 import placeholderImage from '../assets/events_placeholder.jpg';
 import toast from 'react-hot-toast'; // ✅ Import toast
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 
 const MyEvents = () => {
   const [events, setEvents] = useState([]);
@@ -22,7 +22,7 @@ const toggleSidebar = () => {
       const token = localStorage.getItem('token');
       console.log("🔐 Token:", token);
 
-      const response = await fetch(`${baseURL}/vendor/events`, {
+      const response = await fetch(`${baseURL}/events`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

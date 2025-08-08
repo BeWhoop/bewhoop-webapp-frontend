@@ -7,6 +7,7 @@ import FileUploadSplit from '../additional_components/FileUpload.jsx';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
+const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 function EditPortfolio() {
   const { vendorData, setVendorData } = useContext(VendorContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,7 +15,6 @@ function EditPortfolio() {
   const [minPrice, setMinPrice] = useState(vendorData?.minPrice || '');
   const [maxPrice, setMaxPrice] = useState(vendorData?.maxPrice || '');
 
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
   const formRef = useRef(null);
 

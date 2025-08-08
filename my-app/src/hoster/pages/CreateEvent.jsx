@@ -10,8 +10,9 @@ import bin from "../assets/bin.png";
 import edit from "../assets/pencil-write.png";
 import ticketLogo from "../assets/ticketLogo.png";
 
+const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
+
 function CreateEvent() {
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
   const { hosterData, setHosterData } = useContext(HosterContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

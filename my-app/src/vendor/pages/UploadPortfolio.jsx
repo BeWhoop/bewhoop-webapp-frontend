@@ -7,12 +7,12 @@ import FileUpload from '../additional_components/FileUpload.jsx';
 import Trash from '../assets/Trash.png';
 import { VendorContext } from '../contexts/VendorContext.jsx';
 
+const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 function UpdatePortfolio() {
   const frontRef = useRef(null);
   const backRef = useRef(null);
   const { vendorData, setVendorData } = useContext(VendorContext);
   const navigate = useNavigate();
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
   const token = localStorage.getItem('token');
   const [isLoading, setIsLoading] = useState(false);  // ✅ Loading state
 

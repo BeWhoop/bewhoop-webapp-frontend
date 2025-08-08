@@ -72,6 +72,7 @@ html, body {
   align-items: flex-start;
   margin-left: 7rem;
   margin-top: 2rem;
+  margin-bottom: 4rem;
 }
 .login-title-group h1 {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
@@ -105,7 +106,7 @@ html, body {
   font-family: 'BricolageGrotesque-Bold', sans-serif;
   font-size: 16px;
   color: #8A8B8C;
-  margin: 0;
+  margin: auto 2rem 1rem auto;
   text-align: right;
   white-space: nowrap;
 }
@@ -116,7 +117,7 @@ html, body {
   width: 100%;
   max-width: 550px;
   margin-left: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 .login-simple-input {
   width: 100%;

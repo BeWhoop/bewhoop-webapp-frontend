@@ -46,7 +46,7 @@ function ResetPass() {
 
     try {
       
-      const baseURL = import.meta.env.VITE_MOBILE_BASE_URL;
+      const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 
       const response = await fetch(`${baseURL}/users/email-reset`, {
         method: 'POST',

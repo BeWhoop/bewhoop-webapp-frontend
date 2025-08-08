@@ -5,6 +5,8 @@ import '../styles/VendorSetup.css';
 import karaokeBg from '../assets/Karaoke.png';
 import { VendorContext } from '../contexts/VendorContext.jsx';
 
+const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
+
 function VendorSetup() {
   const [eventInput, setEventInput] = useState('');
   const [events, setEvents] = useState([]);
@@ -16,7 +18,6 @@ function VendorSetup() {
   const [isSubmitting, setIsSubmitting] = useState(false);  // ✅ Loading state
 
   const { vendorData, setVendorData } = useContext(VendorContext);
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
 
   const handleAddEvent = (e) => {

@@ -5,7 +5,7 @@ import Bg from '../assets/Bg-2.png';
 import { HosterContext } from '../contexts/HosterContext.jsx';
 import toast from 'react-hot-toast';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 
 function HosterSetup() {
   const [eventInput, setEventInput] = useState('');

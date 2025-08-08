@@ -34,10 +34,15 @@
   display: flex;
   flex-direction: column;
 }
+.create-main-content Header {
+  height: 60px;
+  flex-shrink: 0;
+}
+
+/* 2. scrollable panel starts after header */
 .create-edit-profile-scrollable {
-  overflow-y: auto;
   height: calc(100vh - 60px);
-  width: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -325,7 +330,6 @@ input:checked + .create-slider::before {
 }
 
 @media (max-width: 480px) {
-  .create-edit-profile-scrollable { padding-left: 12px; padding-right: 12px; }
 
   .create-label1 { font-size: 22px; }
 
@@ -338,18 +342,70 @@ input:checked + .create-slider::before {
     padding: 8px;
   }
 
-  .vendor-card {
-    padding: 6px;
-  }
+  .vendor-card { padding: 6px; }
 
   .create-box,
   .bank-box,
-  .tickets-box {
-    padding: 12px;
+  .tickets-box { padding: 12px 16px; }  /* 16 px right padding */
+
+  .tickets-ticket-card { padding: 10px; font-size: 12px; }
+}
+
+@media (max-width: 400px) {
+  /* root container no longer clips */
+  .create-dashboard-container,
+  .create-main-content,
+  .create-edit-profile-scrollable {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
+  /* extra padding so nothing touches edges */
+  .create-edit-profile-scrollable {
+    padding: 16px 10px;
+  }
+
+  /* make boxes & inputs fluid */
+
+  .create-box-middle,
+  .create-box,
+  .bank-box,
+  .tickets-box {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 10px;
+    border-radius: 6px;
+  }
+
+  /* shrink fonts but keep readable */
+  .create-label1 { font-size: 20px; }
+  .create-label2,
+  .bank-label2,
+  .tickets-label2 { font-size: 14px; }
+
+  .create-input,
+  .create-simple-input,
+  .bank-select-input,
+  .bank-simple-input,
+  .tickets-simple-input {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  /* buttons shrink to fit */
+  .create-save-button,
+  .create-save-button2,
+  .bank-add-ticket-button,
+  .tickets-add-ticket-button {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* smaller cards & gaps */
   .tickets-ticket-card {
-    padding: 10px;
-    font-size: 12px;
+    padding: 6px;
+    font-size: 11px;
   }
 }
