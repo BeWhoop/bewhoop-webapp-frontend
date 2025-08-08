@@ -1,6 +1,6 @@
 import { useRef, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';   // ✅ import toast
+import toast from 'react-hot-toast';
 import '../styles/UploadPortfolio.css';
 import Bg from '../assets/UploadPortfolio.png';
 import FileUpload from '../additional_components/FileUpload.jsx';
@@ -8,13 +8,14 @@ import Trash from '../assets/Trash.png';
 import { VendorContext } from '../contexts/VendorContext.jsx';
 
 const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
+
 function UpdatePortfolio() {
   const frontRef = useRef(null);
   const backRef = useRef(null);
   const { vendorData, setVendorData } = useContext(VendorContext);
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const [isLoading, setIsLoading] = useState(false);  // ✅ Loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateFile = (file) => {
     const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'application/pdf'];
@@ -86,7 +87,6 @@ function UpdatePortfolio() {
         toast.error('Failed to upload files.');
         toast.dismiss(loadingToast);
         setIsLoading(false);
-        
         return;
       }
 
@@ -135,7 +135,6 @@ function UpdatePortfolio() {
       toast.success('Profile updated successfully!');
       toast.dismiss(loadingToast);
       navigate('/vendor/dashboard');
-
     } catch (err) {
       console.error(err);
       toast.error('Something went wrong. Please try again.');
@@ -154,101 +153,107 @@ function UpdatePortfolio() {
     type.includes('image') ? type.replace('image/', '') : 'PDF';
 
   return (
-    <div className="update-portfolio-card">
-      <div
-        className="update-portfolio-left-bg"
-        style={{ backgroundImage: `url(${Bg})` }}
-      >
+    <div className="update-portfolio-vendor-card">
+      <div className="update-portfolio-left-bg">
         <div className="update-portfolio-text-group">
           <h1>Upload Portfolio</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
         </div>
       </div>
-
-      <div className="update-portfolio-info">
-        <label className="update-portfolio-label1">Add Portfolio</label>
-        <FileUpload />
-
-        <label className="update-portfolio-label1">Add Your CNIC</label>
-        <div className="update-portfolio-cnic-upload">
-          <div className="update-portfolio-cnic-buttons">
-            <div className="update-portfolio-upload-group">
-              <input
-                type="file"
-                accept=".png, .jpg, .jpeg, .pdf"
-                ref={frontRef}
-                style={{ display: 'none' }}
-                onChange={handleUploadFront}
-              />
-              <button
-                className="update-portfolio-upload-button"
-                onClick={() => frontRef.current.click()}
-              >
-                Upload Front
-              </button>
-            </div>
-
-            <div className="update-portfolio-upload-group">
-              <input
-                type="file"
-                accept=".png, .jpg, .jpeg, .pdf"
-                ref={backRef}
-                style={{ display: 'none' }}
-                onChange={handleUploadBack}
-              />
-              <button
-                className="update-portfolio-upload-button"
-                onClick={() => backRef.current.click()}
-              >
-                Upload Back
-              </button>
-            </div>
-          </div>
-
-          <div className="update-portfolio-cnic-previews">
-            {vendorData.cnicFront && (
-              <div className="update-portfolio-cnic-info">
-                <span>{vendorData.cnicFront.name}</span>
-                <div>
-                  <span style={{ fontSize: '14px', color: '#666' }}>
-                    {formatFileSize(vendorData.cnicFront.size)}, {getFileType(vendorData.cnicFront.type)}
-                  </span>
-                </div>
-                <img
-                  src={Trash}
-                  alt="delete"
-                  className="update-portfolio-trash-icon"
-                  onClick={() =>
-                    setVendorData((prev) => ({ ...prev, cnicFront: null }))
-                  }
+      <div className="update-portfolio-vendor-info">
+        <div className="update-portfolio-title-group">
+          <h1>Upload Your Portfolio</h1>
+          <p>Add your portfolio and CNIC to complete your profile.</p>
+        </div>
+        {/* Portfolio Upload */}
+        <div className="update-portfolio-container">
+          <label className="update-portfolio-label1">Add Portfolio</label>
+        </div>
+        <div className="update-portfolio-input-wrapper">
+          <FileUpload />
+        </div>
+        {/* CNIC Upload */}
+        <div className="update-portfolio-container">
+          <label className="update-portfolio-label1">Add Your CNIC</label>
+        </div>
+        <div className="update-portfolio-input-wrapper">
+          <div className="update-portfolio-cnic-upload">
+            <div className="update-portfolio-cnic-buttons">
+              <div className="update-portfolio-upload-group">
+                <input
+                  type="file"
+                  accept=".png, .jpg, .jpeg, .pdf"
+                  ref={frontRef}
+                  style={{ display: 'none' }}
+                  onChange={handleUploadFront}
                 />
+                <button
+                  className="update-portfolio-upload-button"
+                  onClick={() => frontRef.current.click()}
+                >
+                  Upload Front
+                </button>
               </div>
-            )}
-            {vendorData.cnicBack && (
-              <div className="update-portfolio-cnic-info">
-                <span>{vendorData.cnicBack.name}</span>
-                <div>
-                  <span style={{ fontSize: '14px', color: '#666' }}>
-                    {formatFileSize(vendorData.cnicBack.size)}, {getFileType(vendorData.cnicBack.type)}
-                  </span>
-                </div>
-                <img
-                  src={Trash}
-                  alt="delete"
-                  className="update-portfolio-trash-icon"
-                  onClick={() =>
-                    setVendorData((prev) => ({ ...prev, cnicBack: null }))
-                  }
+              <div className="update-portfolio-upload-group">
+                <input
+                  type="file"
+                  accept=".png, .jpg, .jpeg, .pdf"
+                  ref={backRef}
+                  style={{ display: 'none' }}
+                  onChange={handleUploadBack}
                 />
+                <button
+                  className="update-portfolio-upload-button"
+                  onClick={() => backRef.current.click()}
+                >
+                  Upload Back
+                </button>
               </div>
-            )}
+            </div>
+            <div className="update-portfolio-cnic-previews">
+              {vendorData.cnicFront && (
+                <div className="update-portfolio-cnic-info">
+                  <span className="update-portfolio-cnic-filename">{vendorData.cnicFront.name}</span>
+                  <div>
+                    <span className="update-portfolio-cnic-details">
+                      {formatFileSize(vendorData.cnicFront.size)}, {getFileType(vendorData.cnicFront.type)}
+                    </span>
+                  </div>
+                  <img
+                    src={Trash}
+                    alt="delete"
+                    className="update-portfolio-trash-icon"
+                    onClick={() =>
+                      setVendorData((prev) => ({ ...prev, cnicFront: null }))
+                    }
+                  />
+                </div>
+              )}
+              {vendorData.cnicBack && (
+                <div className="update-portfolio-cnic-info">
+                  <span className="update-portfolio-cnic-filename">{vendorData.cnicBack.name}</span>
+                  <div>
+                    <span className="update-portfolio-cnic-details">
+                      {formatFileSize(vendorData.cnicBack.size)}, {getFileType(vendorData.cnicBack.type)}
+                    </span>
+                  </div>
+                  <img
+                    src={Trash}
+                    alt="delete"
+                    className="update-portfolio-trash-icon"
+                    onClick={() =>
+                      setVendorData((prev) => ({ ...prev, cnicBack: null }))
+                    }
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-
         <button
           className="update-portfolio-next-button"
           onClick={handleNext}
-          disabled={isLoading}   // ✅ Disable while uploading
+          disabled={isLoading}
         >
           {isLoading ? 'Processing...' : 'Next'}
         </button>

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';  // ✅ Toast import
+import toast from 'react-hot-toast';
 import '../styles/VendorSetup.css';
 import karaokeBg from '../assets/Karaoke.png';
 import { VendorContext } from '../contexts/VendorContext.jsx';
@@ -10,12 +10,12 @@ const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 function VendorSetup() {
   const [eventInput, setEventInput] = useState('');
   const [events, setEvents] = useState([]);
-  const [availableEvents, setavailableEvents] = useState([
+  const [availableEvents, setAvailableEvents] = useState([
     'Photography',
     'Catering',
     'Videography',
   ]);
-  const [isSubmitting, setIsSubmitting] = useState(false);  // ✅ Loading state
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { vendorData, setVendorData } = useContext(VendorContext);
   const navigate = useNavigate();
@@ -35,14 +35,14 @@ function VendorSetup() {
     const removed = events[index];
     setEvents(events.filter((_, i) => i !== index));
     if (['Photography', 'Catering', 'Videography'].includes(removed)) {
-      setavailableEvents((prev) => [...prev, removed]);
+      setAvailableEvents((prev) => [...prev, removed]);
     }
   };
 
   const addAvailableEvent = (name) => {
     if (!events.includes(name)) {
       setEvents([...events, name]);
-      setavailableEvents((prev) => prev.filter((ev) => ev !== name));
+      setAvailableEvents((prev) => prev.filter((ev) => ev !== name));
     }
   };
 
@@ -56,6 +56,11 @@ function VendorSetup() {
     const maxPrice = form.maxPrice.value;
     const budgetRange = `$${minPrice}-$${maxPrice}`;
 
+    if (events.length === 0) {
+      toast.error('Please add at least one service.');
+      return;
+    }
+
     setVendorData((prev) => ({
       ...prev,
       services: events,
@@ -65,7 +70,7 @@ function VendorSetup() {
       location: city,
     }));
 
-    setIsSubmitting(true);  // ✅ Disable button & show loading
+    setIsSubmitting(true);
     const loadingToast = toast.loading('Registering vendor...');
 
     try {
@@ -111,105 +116,119 @@ function VendorSetup() {
   };
 
   return (
-    <div className="vendorsetup-card">
-      <div
-        className="vendorsetup-left-bg"
-        style={{ backgroundImage: `url(${karaokeBg})` }}
-      >
+    <div className="vendorsetup-vendor-card">
+      <div className="vendorsetup-left-bg">
         <div className="vendorsetup-text-group">
           <h1>Get A Vendor Profile</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins.</p>
         </div>
       </div>
-
-      <form className="vendorsetup-info" onSubmit={handleSubmit}>
-        <label className="vendorsetup-label1">
-          What type of services do you provide?
-        </label>
-        <div className="vendorsetup-text-container">
-          <input
-            className="vendorsetup-events"
-            placeholder="Type and press , to add services"
-            value={eventInput}
-            onChange={(e) => setEventInput(e.target.value)}
-            onKeyDown={handleAddEvent}
-            required={events.length === 0}
-          />
-          <div className="vendorsetup-eventsAdded">
-            {events.map((ev, i) => (
-              <span key={i} className="vendorsetup-event-chip">
-                {ev}
-                <button
-                  type="button"
-                  className="vendorsetup-remove-btn"
-                  onClick={() => removeEvent(i)}
-                >
-                  ×
-                </button>
+      <form className="vendorsetup-vendor-info" onSubmit={handleSubmit}>
+        <div className="vendorsetup-title-group">
+          <h1>Complete Your Vendor Setup</h1>
+          <p>Add your services and details to get started.</p>
+        </div>
+        {/* Services Input */}
+        <div className="vendorsetup-container">
+          <label className="vendorsetup-label1">What type of services do you provide?</label>
+        </div>
+        <div className="vendorsetup-input-wrapper">
+          <div className="vendorsetup-text-container">
+            <input
+              className="vendorsetup-events"
+              placeholder="Type and press , to add services"
+              value={eventInput}
+              onChange={(e) => setEventInput(e.target.value)}
+              onKeyDown={handleAddEvent}
+              required={events.length === 0}
+            />
+            <div className="vendorsetup-eventsAdded">
+              {events.map((ev, i) => (
+                <span key={i} className="vendorsetup-event-chip">
+                  {ev}
+                  <button
+                    type="button"
+                    className="vendorsetup-remove-btn"
+                    onClick={() => removeEvent(i)}
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="vendorsetup-available-events">
+            {availableEvents.map((ev, i) => (
+              <span
+                key={i}
+                className="vendorsetup-add-chip"
+                onClick={() => addAvailableEvent(ev)}
+              >
+                {ev} +
               </span>
             ))}
           </div>
         </div>
-
-        <div className="vendorsetup-available-events">
-          {availableEvents.map((ev, i) => (
-            <span
-              key={i}
-              className="vendorsetup-add-chip"
-              onClick={() => addAvailableEvent(ev)}
-            >
-              {ev} +
-            </span>
-          ))}
+        {/* Location Input */}
+        <div className="vendorsetup-container">
+          <label className="vendorsetup-label1">Your Location</label>
         </div>
-
-        <label className="vendorsetup-label3">Your Location</label>
-        <select
-          name="city"
-          className="vendorsetup-select-input"
-          required
-          defaultValue=""
-        >
-          <option value="" disabled>Select city</option>
-          <option>Islamabad</option>
-          <option>Lahore</option>
-          <option>Karachi</option>
-          <option>Peshawar</option>
-          <option>Quetta</option>
-        </select>
-
-        <input
-          name="mapLink"
-          className="vendorsetup-simple-input"
-          type="url"
-          placeholder="Google Maps link"
-          required
-        />
-
-        <label className="vendorsetup-label3">Price Range</label>
-        <div className="vendorsetup-price-range">
-          <input
-            name="minPrice"
-            className="vendorsetup-input-range"
-            placeholder="Minimum"
-            type="number"
-            min="0"
+        <div className="vendorsetup-input-wrapper">
+          <select
+            name="city"
+            className="vendorsetup-select-input"
             required
-          />
+            defaultValue=""
+          >
+            <option value="" disabled>Select city</option>
+            <option>Islamabad</option>
+            <option>Lahore</option>
+            <option>Karachi</option>
+            <option>Peshawar</option>
+            <option>Quetta</option>
+          </select>
+        </div>
+        {/* Map Link Input */}
+        <div className="vendorsetup-container">
+          <label className="vendorsetup-label1">Google Maps Link</label>
+        </div>
+        <div className="vendorsetup-input-wrapper">
           <input
-            name="maxPrice"
-            className="vendorsetup-input-range"
-            placeholder="Maximum"
-            type="number"
-            min="0"
+            name="mapLink"
+            className="vendorsetup-simple-input"
+            type="url"
+            placeholder="Google Maps link"
             required
           />
         </div>
-
+        {/* Price Range Input */}
+        <div className="vendorsetup-container">
+          <label className="vendorsetup-label1">Price Range</label>
+        </div>
+        <div className="vendorsetup-input-wrapper">
+          <div className="vendorsetup-price-range">
+            <input
+              name="minPrice"
+              className="vendorsetup-input-range"
+              placeholder="Minimum"
+              type="number"
+              min="0"
+              required
+            />
+            <input
+              name="maxPrice"
+              className="vendorsetup-input-range"
+              placeholder="Maximum"
+              type="number"
+              min="0"
+              required
+            />
+          </div>
+        </div>
         <button
           type="submit"
           className="vendorsetup-next-button"
-          disabled={isSubmitting}   // ✅ Disable while submitting
+          disabled={isSubmitting}
         >
           {isSubmitting ? 'Submitting...' : 'Next'}
         </button>

@@ -4,7 +4,7 @@ import Vector from '../assets/Vector.png';
 import Trash from '../assets/Trash.png';
 import { VendorContext } from '../contexts/VendorContext.jsx';
 
-function FileUploadSplit() {
+function FileUpload() {
   const [files, setFiles] = useState([]);
   const fileInputRef = useRef(null);
   const { vendorData, setVendorData } = useContext(VendorContext);
@@ -18,7 +18,6 @@ function FileUploadSplit() {
     'audio/mpeg',
   ];
 
-  // Sync local files with vendorData.portfolio
   useEffect(() => {
     setVendorData((prev) => ({
       ...prev,
@@ -90,64 +89,43 @@ function FileUploadSplit() {
         <button className="fileupload-button" onClick={handleUploadClick}>
           Upload Files
         </button>
-        <p style={{ marginTop: '10px', fontSize: '12px' }}>
+        <p className="fileupload-supported-text">
           Supported: PDF, JPG, PNG, MP4, MP3
         </p>
       </div>
-
       <div className="fileupload-list">
-        <ul className="fileupload-ul">
-          {files.map((file, index) => (
-            <li
-              key={index}
-              className="fileupload-li"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '10px',
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                backgroundColor: '#f9f9f9'
-              }}
-            >
-              {file.type.startsWith('image/') && (
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt="preview"
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    objectFit: 'cover',
-                    borderRadius: '4px'
-                  }}
-                />
-              )}
-              <div style={{ flexGrow: 1 }}>
-                <div>{file.name}</div>
-                <div style={{ fontSize: '14px', color: '#666' }}>
-                  {formatFileSize(file.size)}, {getFileType(file.type)}
-                </div>
-              </div>
+        {files.map((file, index) => (
+          <div
+            key={index}
+            className="fileupload-item"
+          >
+            {file.type.startsWith('image/') && (
               <img
-                src={Trash}
-                alt="Delete"
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  cursor: 'pointer',
-                }}
-                onClick={() => {
-                  const updatedFiles = files.filter((_, i) => i !== index);
-                  setFiles(updatedFiles);
-                }}
+                src={URL.createObjectURL(file)}
+                alt="preview"
+                className="fileupload-preview-img"
               />
-            </li>
-          ))}
-        </ul>
+            )}
+            <div className="fileupload-info">
+              <div className="fileupload-filename">{file.name}</div>
+              <div className="fileupload-details">
+                {formatFileSize(file.size)}, {getFileType(file.type)}
+              </div>
+            </div>
+            <img
+              src={Trash}
+              alt="Delete"
+              className="fileupload-trash-icon"
+              onClick={() => {
+                const updatedFiles = files.filter((_, i) => i !== index);
+                setFiles(updatedFiles);
+              }}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default FileUploadSplit;
+export default FileUpload;

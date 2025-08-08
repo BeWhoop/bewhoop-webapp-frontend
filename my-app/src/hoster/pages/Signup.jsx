@@ -1,103 +1,60 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import '../styles/Signup1.css';
-import signup from '../assets/Signup-bg.png';
+import signupBg from '../assets/Signup-bg.png';
 import googleIcon from '../assets/Google-Icon.png';
 import fbIcon from '../assets/FB-Icon.png';
 import whIcon from '../assets/WH-Icon.png';
 import { HosterContext } from '../contexts/HosterContext.jsx';
 import TOS from '../additional_components/TOS.jsx';
-import toast from 'react-hot-toast';
 
-const Signup = () => {
-  const [realPassword, setRealPassword] = useState('');
-  const [maskedPassword, setMaskedPassword] = useState('');
+function Signup() {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showTOS, setShowTOS] = useState(false);
-  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { setHosterData } = useContext(HosterContext);
+  const baseURL = import.meta.env.VITE_MOBILE_BASE_URL;
   const navigate = useNavigate();
 
-  const handlePassChange = async () => {
-    if (!email) {
-      toast.error('Please enter your email first');
-      return;
-    }
-    if (!email.includes('@') || !email.includes('.')) {
-      toast.error('Please enter a valid Email.');
-      return;
-    }
-
-
-    try{
-      const baseURL = import.meta.env.VITE_MOBILE_BASE_URL;
-      const response = await fetch(`${baseURL}/users/password-reset-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error();
-      }
-      
-      toast.success('Password reset link sent to your email!');
-      setEmail('');
-    }
-    catch (error) {
-      toast.error('Error sending reset link. Please try again later.');
-      return;
-    }
-
+  const isPasswordValid = (pwd) => {
+    const regex = /^.{8,}$/;
+    return regex.test(pwd);
   };
 
-  const handlePasswordChange = (e) => {
-    const input = e.target.value;
-    if (input.length > maskedPassword.length) {
-      const newChar = input[input.length - 1];
-      setRealPassword((prev) => prev + newChar);
-    } else {
-      setRealPassword((prev) => prev.slice(0, -1));
-    }
-    setMaskedPassword('●'.repeat(input.length));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const fullName = form.fullName.value.trim();
-    const email = form.email.value.trim();
-
-    if (fullName.length < 3) {
-      toast.error('Please enter a valid Full Name.');
+    if (!fullName || !email || !password) {
+      toast.error('Please fill in all fields.');
       return;
     }
-
     if (!email.includes('@') || !email.includes('.')) {
-      toast.error('Please enter a valid Email.');
+      toast.error('Please enter a valid email.');
       return;
     }
-
-    if (realPassword.length < 6) {
-      toast.error('Password must be at least 6 characters.');
+    if (!isPasswordValid(password)) {
+      toast.error('Password must be at least 8 characters long.');
       return;
     }
-
     if (!termsAccepted) {
-      toast.error('You must accept the terms and conditions.');
+      toast.error('Please accept terms and conditions.');
       return;
     }
+
+    setIsSubmitting(true);
 
     setHosterData((prev) => ({
       ...prev,
       fullName,
       email,
-      password: realPassword,
+      password,
     }));
-
-    toast.success('Success saving information...');
+    toast.success('Successful!');
     navigate('/hoster/setup');
   };
 
@@ -105,80 +62,99 @@ const Signup = () => {
     <div className="signup1-vendor-card">
       <div className="signup1-left-bg">
         <div className="signup1-text-group">
-          <h1>Connect with Hosts</h1>
-          <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
+          <h1>Join as a Event Host</h1>
+          <p>Reference site about Lorem Ipsum, giving information on its origins as well.</p>
         </div>
       </div>
-
       <form className="signup1-vendor-info" onSubmit={handleSubmit}>
         <div className="signup1-title-group">
-          <h1>Join as an Event Host</h1>
-          <p>Create an new account today to join as a host</p>
+          <h1>Join as a Event Host</h1>
+          <p>Create an account to join as a host</p>
         </div>
-
-        <label className="signup1-label1">Full Name</label>
-        <input
-          name="fullName"
-          className="signup1-simple-input"
-          placeholder="Example: Henna Adam"
-
-        />
-
-        <label className="signup1-label1">Email</label>
-        <input
-          name="email"
-          type="email"
-          className="signup1-simple-input"
-          placeholder="Henna_Adam@gmail.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
+        {/* Name Field */}
         <div className="signup1-password-container">
-          <label className="signup1-label1">Password</label>
+          <label className="signup1-label1">Full Name</label>
         </div>
-
-        <input
-          type="text"
-          className="signup1-simple-input"
-          placeholder="● ● ● ● ● ●"
-          value={maskedPassword}
-          onChange={handlePasswordChange}
-          minLength={6}
-        />
-
-        <label className="signup1-label3">
+        <div className="signup1-input-wrapper">
           <input
-            type="checkbox"
-            checked={termsAccepted}
-            onChange={(e) => setTermsAccepted(e.target.checked)}
+            type="text"
+            className="signup1-simple-input"
+            placeholder="Enter your name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            required
           />
-          <a
-            onClick={() => setShowTOS(true)}
-            style={{ textDecoration: 'underline', color: 'black', cursor: 'pointer' }}
+        </div>
+        {/* Email Field */}
+        <div className="signup1-password-container">
+          <label className="signup1-label1">Email</label>
+        </div>
+        <div className="signup1-input-wrapper">
+          <input
+            type="email"
+            className="signup1-simple-input"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        {/* Password Field */}
+        <div className="signup1-password-container">
+          <label className="signup1-label1" style={{ marginBottom: '1rem' }}>Password</label>
+        </div>
+        <div className="signup1-input-wrapper">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            className={`signup1-simple-input ${!showPassword ? 'large-dots' : ''}`}
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            minLength={8}
+            required
+          />
+          <span
+            className="signup1-eye-icon"
+            onClick={() => setShowPassword(!showPassword)}
           >
-            I accept terms and conditions
-          </a>
-        </label>
-
-        <button type="submit" className="signup1-next-button">
-          SignUp
+            {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+          </span>
+        </div>
+        {/* Terms and Conditions */}
+        <div className="signup1-password-container">
+          <label className="signup1-label1">
+            <input
+              type="checkbox"
+              checked={termsAccepted}
+              onChange={(e) => setTermsAccepted(e.target.checked)}
+              required
+            />
+            <span
+              onClick={() => setShowTOS(true)}
+              style={{ textDecoration: 'underline', color: '#202224', cursor: 'pointer', marginLeft: '0.5rem' }}
+            >
+              I accept terms and conditions
+            </span>
+          </label>
+        </div>
+        <button
+          type="submit"
+          className="signup1-next-button"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Signing up...' : 'Sign Up'}
         </button>
-
-        <label className="signup1-label4" onClick={() => navigate('/')}>
-          Already Have An Account? <span>Sign In</span>
-          <br />
-        </label>
-
         <div className="signup1-social-icons">
+          <span className="signup1-login-text">
+            Already Have an Account?{' '}
+            <a href="/" style={{ color: '#BE0000' }}>Sign In</a>
+          </span>
           <div className="signup1-divider-with-text">
             <span className="signup1-line"></span>
             <span className="signup1-or-text">or</span>
             <span className="signup1-line"></span>
           </div>
-
-          <span className="signup1-login-text">Login with Social Apps</span>
-
+          <span className="signup1-login-text">Social Apps</span>
           <div className="signup1-social-icons-icons">
             <img src={fbIcon} alt="fb-icon" />
             <img src={googleIcon} alt="google-icon" />
@@ -186,10 +162,9 @@ const Signup = () => {
           </div>
         </div>
       </form>
-
       {showTOS && <TOS onClose={() => setShowTOS(false)} />}
     </div>
   );
-};
+}
 
 export default Signup;

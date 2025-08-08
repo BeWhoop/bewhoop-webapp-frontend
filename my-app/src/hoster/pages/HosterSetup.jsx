@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'; 
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/HosterSetup.css';
 import Bg from '../assets/Bg-2.png';
@@ -10,7 +10,7 @@ const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 function HosterSetup() {
   const [eventInput, setEventInput] = useState('');
   const [events, setEvents] = useState([]);
-  const [availableEvents, setavailableEvents] = useState(["Lifestyle", "Cultural", "Comedy"]);
+  const [availableEvents, setAvailableEvents] = useState(["Lifestyle", "Cultural", "Comedy"]);
   const [eventFrequency, setEventFrequency] = useState('');
   const [avgSize, setAvgSize] = useState('');
 
@@ -36,7 +36,7 @@ function HosterSetup() {
   const addAvailableEvent = (eventName) => {
     if (!events.includes(eventName)) {
       setEvents([...events, eventName]);
-      setavailableEvents(availableEvents.filter(ev => ev !== eventName));
+      setAvailableEvents(availableEvents.filter(ev => ev !== eventName));
     }
   };
 
@@ -88,7 +88,7 @@ function HosterSetup() {
       });
 
       const result = await response.json();
-      toast.dismiss(); // remove loading toast
+      toast.dismiss();
 
       if (response.ok && result.status === 'success') {
         toast.success('Host profile created successfully!');
@@ -118,77 +118,83 @@ function HosterSetup() {
 
   return (
     <div className="hostersetup-card">
-      <div className="hostersetup-left-bg" style={{ backgroundImage: `url(${Bg})` }}>
+      <div className="hostersetup-left-bg">
         <div className="hostersetup-text-group">
           <h1>MarketPlace</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
         </div>
       </div>
-
       <form className="hostersetup-info" onSubmit={handleSubmit}>
         <div className="hostersetup-title-group">
           <h1>Let’s set things up for you.</h1>
           <p>Share your vision, and we’ll help make it real.</p>
         </div>
-
-        <label className="hostersetup-label1">Your events frequency</label>
-        <select
-          className="hostersetup-select-input"
-          value={eventFrequency}
-          onChange={(e) => setEventFrequency(e.target.value)}
-        >
-          <option value="">Select Event Frequency</option>
-          <option value="Daily">Daily</option>
-          <option value="Weekly">Weekly</option>
-          <option value="Every Two Weeks">Every Two Weeks</option>
-          <option value="Monthly">Monthly</option>
-          <option value="Every Two Months">Every Two Months</option>
-          <option value="Annually ">Annually</option>
-          <option value="Twice a Year ">Twice a Year</option>
-        </select>
-
-        <label className="hostersetup-label3">Average Size of Event</label>
-        <select
-          className="hostersetup-select-input"
-          value={avgSize}
-          onChange={(e) => setAvgSize(e.target.value)}
-        >
-          <option value="">Select size</option>
-          <option value="100">100</option>
-          <option value="500">500</option>
-          <option value="1000">1000</option>
-          <option value="1500">1500</option>
-          <option value="2000">2000</option>
-          <option value="3000">3000</option>
-        </select>
-
-        <label className="hostersetup-label3">Type of Event</label>
-        <div className="hostersetup-text-container">
-          <input
-            className="hostersetup-events"
-            placeholder="Type and Press (,) to add Events..."
-            value={eventInput}
-            onChange={(e) => setEventInput(e.target.value)}
-            onKeyDown={handleAddEvent}
-          />
-          <div className="hostersetup-eventsAdded">
-            {events.map((ev, index) => (
-              <span key={index} className="hostersetup-event-chip">
-                {ev}
-                <button className="hostersetup-remove-btn" onClick={() => removeEvent(index)}>×</button>
+        <div className="hostersetup-container">
+          <label className="hostersetup-label1">Your events frequency</label>
+        </div>
+        <div className="hostersetup-input-wrapper">
+          <select
+            className="hostersetup-select-input"
+            value={eventFrequency}
+            onChange={(e) => setEventFrequency(e.target.value)}
+          >
+            <option value="">Select Event Frequency</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Every Two Weeks">Every Two Weeks</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Every Two Months">Every Two Months</option>
+            <option value="Annually">Annually</option>
+            <option value="Twice a Year">Twice a Year</option>
+          </select>
+        </div>
+        <div className="hostersetup-container">
+          <label className="hostersetup-label1">Average Size of Event</label>
+        </div>
+        <div className="hostersetup-input-wrapper">
+          <select
+            className="hostersetup-select-input"
+            value={avgSize}
+            onChange={(e) => setAvgSize(e.target.value)}
+          >
+            <option value="">Select size</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="1500">1500</option>
+            <option value="2000">2000</option>
+            <option value="3000">3000</option>
+          </select>
+        </div>
+        <div className="hostersetup-container">
+          <label className="hostersetup-label1">Type of Event</label>
+        </div>
+        <div className="hostersetup-input-wrapper">
+          <div className="hostersetup-text-container">
+            <input
+              className="hostersetup-events"
+              placeholder="Type and Press (,) to add Events..."
+              value={eventInput}
+              onChange={(e) => setEventInput(e.target.value)}
+              onKeyDown={handleAddEvent}
+            />
+            <div className="hostersetup-eventsAdded">
+              {events.map((ev, index) => (
+                <span key={index} className="hostersetup-event-chip">
+                  {ev}
+                  <button className="hostersetup-remove-btn" onClick={() => removeEvent(index)}>×</button>
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="hostersetup-available-events">
+            {availableEvents.map((ev, index) => (
+              <span key={index} className="hostersetup-add-chip" onClick={() => addAvailableEvent(ev)}>
+                {ev} +
               </span>
             ))}
           </div>
         </div>
-
-        <div className="hostersetup-available-events">
-          {availableEvents.map((ev, index) => (
-            <span key={index} className="hostersetup-add-chip" onClick={() => addAvailableEvent(ev)}>
-              {ev} +
-            </span>
-          ))}
-        </div>
-
         <button type="submit" className="hostersetup-next-button">Next</button>
       </form>
     </div>

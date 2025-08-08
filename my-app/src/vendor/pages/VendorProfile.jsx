@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';  // ✅ Import toast
+import toast from 'react-hot-toast';
 import { VendorContext } from '../contexts/VendorContext.jsx';
 import '../styles/VendorProfile.css';
 import bg from '../assets/bg-pic.png';
@@ -52,36 +52,44 @@ function VendorProfile() {
   };
 
   return (
-    <div className="vp-container">
-      <div className="vp-left">
+    <div className="vp-vendor-card">
+      <div className="vp-left-bg">
         <div className="vp-text-group">
           <h1>Get A Vendor Profile</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins, as well.</p>
         </div>
       </div>
-
-      <div className="vp-info">
-        <h1>Let's set things up for you.</h1>
-        <p>Share your vision, and we'll help make it real.</p>
-
-        <label className="vp-label1">Add Profile Photo</label>
-        <div
-          className="vp-upload"
-          onClick={handleUploadClick}
-          style={{ backgroundImage: `url(${profilePreview || defaultImage})` }}
-        >
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
+      <div className="vp-vendor-info">
+        <div className="vp-title-group">
+          <h1>Let's set things up for you.</h1>
+          <p>Share your vision, and we'll help make it real.</p>
         </div>
-
-        <label className="vp-label2">Add Description</label>
-        <textarea className="vp-description-input" placeholder="Write here..." />
-
+        {/* Profile Photo */}
+        <div className="vp-container">
+          <label className="vp-label1">Add Profile Photo</label>
+        </div>
+        <div className="vp-input-wrapper">
+          <div
+            className="vp-upload"
+            onClick={handleUploadClick}
+            style={{ backgroundImage: `url(${profilePreview || defaultImage})` }}
+          >
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+          </div>
+        </div>
+        {/* Description */}
+        <div className="vp-container">
+          <label className="vp-label1">Add Description</label>
+        </div>
+        <div className="vp-input-wrapper">
+          <textarea className="vp-description-input" placeholder="Write here..." />
+        </div>
         <button className="vp-next-button" onClick={handleNext}>
           Next
         </button>
