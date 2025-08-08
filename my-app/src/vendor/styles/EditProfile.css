@@ -328,7 +328,9 @@ select:focus {
   .editportfolio-input-range {
     width: 100%;
   }
-
+  
+.editprofile-save-button,
+.editservices-save-button,
 .editportfolio-save-button {
   background-color: #be0000;
   color: white;
