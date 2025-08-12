@@ -228,7 +228,7 @@ html, body {
   }
   .update-portfolio-vendor-info {
     width: 100%;
-    padding: 2rem 1rem;
+    padding: 2rem 3rem;
     min-height: 100vh;
     align-items: center;
     overflow-y: auto;
@@ -266,7 +266,7 @@ html, body {
 
 @media (max-width: 480px) {
   .update-portfolio-vendor-info {
-    padding: 1rem 0.75rem;
+    padding: 1rem 2rem;
   }
   .update-portfolio-title-group h1 {
     font-size: 24px;
@@ -306,7 +306,7 @@ html, body {
 
 @media (max-width: 400px) {
   .update-portfolio-vendor-info {
-    padding: 0.75rem 0.5rem;
+    padding: 0.75rem 1.5rem;
   }
   .update-portfolio-next-button,
   .update-portfolio-input-wrapper,
