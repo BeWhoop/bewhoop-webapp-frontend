@@ -203,7 +203,7 @@ html, body {
   }
   .signup1-vendor-info {
     width: 100%;
-    padding: 2rem 1rem;
+    padding: 2rem 3rem;
     min-height: 100vh;
     align-items: center;
     overflow-y: auto;
@@ -227,7 +227,7 @@ html, body {
 }
 
 @media (max-width: 480px) {
-  .signup1-vendor-info { padding: 1rem 0.75rem; }
+  .signup1-vendor-info { padding: 2rem 2rem; }
   .signup1-title-group h1 { font-size: 24px; }
   .signup1-title-group p { font-size: 16px; }
   .signup1-simple-input { font-size: 16px; padding: 0.6rem; }
@@ -242,7 +242,7 @@ html, body {
 }
 
 @media (max-width: 400px) {
-  .signup1-vendor-info { padding: 0.75rem 0.5rem; }
+  .signup1-vendor-info { padding: 2rem 2rem; }
   .signup1-next-button,
   .signup1-input-wrapper,
   .signup1-password-container {

@@ -17,7 +17,7 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
-      <div className={`dashboard-main-content ${isSidebarOpen ? '' : 'full-width'}`}>
+      <div className="dashboard-main-content">
         <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="dashboard-scrollable">
           <div className="dashboard-wrapper">

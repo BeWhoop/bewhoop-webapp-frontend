@@ -184,6 +184,7 @@ html, body {
 .hostersetup-available-events {
   display: flex;
   gap: 10px;
+  margin-top:2rem;
   flex-wrap: wrap;
 }
 .hostersetup-add-chip {
@@ -218,51 +219,6 @@ html, body {
 }
 
 /* ---------- RESPONSIVE ---------- */
-@media (max-width: 1300px) and (min-width: 850px) {
-  .hostersetup-left-bg {
-    display: none;
-  }
-  .hostersetup-card {
-    flex-direction: column;
-    height: auto;
-    overflow-y: auto;
-  }
-  .hostersetup-info {
-    width: 100%;
-    padding: 2rem 1rem;
-    min-height: 100vh;
-    align-items: center;
-  }
-  .hostersetup-title-group {
-    margin: 0 0 2rem 0;
-  }
-  .hostersetup-container:nth-child(4) {
-    margin-top: 3rem;
-  }
-  .hostersetup-input-wrapper {
-    margin-bottom: 2.5rem;
-  }
-  .hostersetup-container,
-  .hostersetup-input-wrapper,
-  .hostersetup-select-input,
-  .hostersetup-text-container,
-  .hostersetup-available-events,
-  .hostersetup-next-button {
-    max-width: 400px;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .hostersetup-label1 {
-    margin-top: 0;
-  }
-  .hostersetup-event-chip,
-  .hostersetup-add-chip {
-    font-size: 13px;
-    padding: 5px 10px;
-  }
-}
-
 @media (max-width: 850px) {
   .hostersetup-left-bg {
     display: none;
@@ -274,7 +230,7 @@ html, body {
   }
   .hostersetup-info {
     width: 100%;
-    padding: 2rem 1rem;
+    padding: 2rem 3rem;
     min-height: 100vh;
     align-items: center;
   }
@@ -307,7 +263,7 @@ html, body {
 
 @media (max-width: 480px) {
   .hostersetup-info {
-    padding: 1rem 0.75rem;
+    padding: 1rem 2rem;
   }
   .hostersetup-title-group h1 {
     font-size: 24px;
@@ -345,7 +301,7 @@ html, body {
 
 @media (max-width: 400px) {
   .hostersetup-info {
-    padding: 0.75rem 0.5rem;
+    padding: 0.75rem 1.5rem;
   }
   .hostersetup-container,
   .hostersetup-input-wrapper,
@@ -361,7 +317,7 @@ html, body {
 }
 
 /* ---------- HEIGHT-BASED SCROLL LOCK ---------- */
-@media (min-width: 850px) and (max-height: 700px) {
+@media (min-width: 850px){
   .hostersetup-card {
     display: flex;
     height: 100vh;
