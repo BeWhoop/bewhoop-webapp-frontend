@@ -201,6 +201,20 @@ html, body {
   text-decoration: underline;
 }
 
+.login-vertical-text-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.login-vertical-divider {
+  width: 1px;
+  height: 20px;
+  background-color: #FF5315;
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 850px) {
   .login-left-bg { display: none; }
@@ -253,6 +267,14 @@ html, body {
   .login-social-icons{
     
       margin-top: 3rem;
+  }
+
+   .login-vertical-text-group {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .login-vertical-divider {
+    display: none;
   }
 }
 

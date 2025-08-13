@@ -61,7 +61,7 @@ function Signup() {
 
   return (
     <div className="signup-vendor-card">
-      <div className="signup-left-bg">
+      <div className="signup-left-bg" onLoad>
         <div className="signup-text-group">
           <h1>Join as a Vendor</h1>
           <p>Reference site about Lorem Ipsum, giving information on its origins as well.</p>
@@ -151,7 +151,6 @@ function Signup() {
             <a href="/" style={{ color: '#BE0000' }}>Sign In</a>
           </span>
 
-          {/*NOT IMPLEMENTED YET IN BACKEND
           <div className="signup-divider-with-text">
             <span className="signup-line"></span>
             <span className="signup-or-text">or</span>
@@ -159,11 +158,10 @@ function Signup() {
           </div>
           <span className="signup-login-text">Social Apps</span>
           <div className="signup-social-icons-icons">
-            <img src={fbIcon} alt="fb-icon" />
-            <img src={googleIcon} alt="google-icon" />
-            <img src={whIcon} alt="whatsapp-icon" />
+            <img src={fbIcon} alt="fb-icon" onLoad/>
+            <img src={googleIcon} alt="google-icon" onLoad/>
+            <img src={whIcon} alt="whatsapp-icon" onLoad/>
           </div>
-          */}
         </div>
       </form>
       {showTOS && <TOS onClose={() => setShowTOS(false)} />}

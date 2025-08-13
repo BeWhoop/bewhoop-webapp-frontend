@@ -132,7 +132,6 @@ function ResetPass() {
         <button type="submit" className="reset-next-button" >
           Reset Your Password
         </button>
-        {/*NOT IMPLEMENTED YET IN BACKEND
         <div className="reset-social-icons">
           <div className="reset-divider-with-text">
             <span className="reset-line"></span>
@@ -145,7 +144,7 @@ function ResetPass() {
             <img src={googleIcon} alt="google-icon" />
             <img src={whIcon} alt="whatsapp-icon" />
           </div>
-        </div>*/}
+        </div>
       </form>
     </div>
   );

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { supabase } from '../supabaseClient.js';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
@@ -8,13 +9,59 @@ import fbIcon from '../vendor/assets/FB-Icon.png';
 import googleIcon from '../vendor/assets/Google-Icon.png';
 import whIcon from '../vendor/assets/WH-Icon.png';
 
-function Login() {
+const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
+
+function VendorLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
   const navigate = useNavigate();
+
+  const handleOAuthLogin = async (provider) => {
+    try {
+      // Step 1: Request OAuth login URL from backend
+      const res = await fetch(`${baseURL}/vendors/${provider}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      if (!res.ok) throw new Error(`Failed to get ${provider} login URL`);
+      const data = await res.json();
+      // Step 2: Redirect browser to provider login page
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error('No login URL returned.');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(`Unable to initiate ${provider} login`);
+    }
+  };
+
+  // Step 3: Detect token in URL after redirect
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    if (token) {
+      (async () => {
+        try {
+          const res = await fetch(`${baseURL}/onboarding/oauth/callback`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data?.message || 'OAuth callback failed');
+          localStorage.setItem('token', data.token);
+          toast.success('Login successful!');
+          navigate('/vendor/dashboard');
+        } catch (err) {
+          toast.error('OAuth login failed');
+        }
+      })();
+    }
+  }, []);
 
   const isPasswordValid = (pwd) => {
     const regex = /^.{8,}$/;
@@ -80,8 +127,7 @@ function Login() {
         localStorage.setItem('token', data.token);
         toast.success('Login successful!');
         toast.dismiss(loadingToast);
-        
-        navigate('/hoster/dashboard');
+        navigate('/vendor/dashboard');
       } else {
         throw new Error('Login failed.');
       }
@@ -103,7 +149,7 @@ function Login() {
       </div>
       <form className="login-vendor-info" onSubmit={handleSubmit}>
         <div className="login-title-group">
-          <h1>Sign In to Your Account</h1>
+          <h1>Sign In As A Vendor</h1>
           <p>Sign in right now to manage your profile and services.</p>
         </div>
         {/* Email Field */}
@@ -122,8 +168,14 @@ function Login() {
         </div>
         {/* Password Field */}
         <div className="login-password-container">
-          <label className="login-label1" style={{marginBottom:'1rem'}}>Password</label>
-          <label className="login-label2" onClick={handleForgotPass} style={{ cursor: 'pointer' }}>
+          <label className="login-label1" style={{ marginBottom: '1rem' }}>
+            Password
+          </label>
+          <label
+            className="login-label2"
+            onClick={handleForgotPass}
+            style={{ cursor: 'pointer' }}
+          >
             Forgot Password?
           </label>
         </div>
@@ -152,28 +204,45 @@ function Login() {
           {isSubmitting ? 'Logging in...' : 'Sign In'}
         </button>
         <div className="login-social-icons">
-          <span className="login-login-text">
-            Don't Have An Account? Sign Up as {' '}
-            <a href="/vendor/signup" style={{ color: '#BE0000' }}>Vendor</a>{' '}/{' '}
-            <a href="/hoster/signup" style={{ color: '#BE0000' }}>Host</a>
-          </span>
-          {/*NOT IMPLEMENTED YET
+          <div className="login-vertical-text-group">
+            <span className="login-login-text">
+              Not A Vendor?{' '}
+              <a href="/host/sign-in" style={{ color: '#BE0000' }}>
+                Host Sign In
+              </a>
+            </span>
+            <span className="login-vertical-divider"></span>
+            <span className="login-login-text">
+              First time here?{' '}
+              <a href="/vendor/signup" style={{ color: '#BE0000' }}>
+                Join As Vendor
+              </a>
+            </span>
+          </div>
           <div className="login-divider-with-text">
             <span className="login-line"></span>
             <span className="login-or-text">or</span>
             <span className="login-line"></span>
           </div>
-          <span className="login-login-text">Social Apps</span>
           <div className="login-social-icons-icons">
-            <img src={fbIcon} alt="fb-icon" />
-            <img src={googleIcon} alt="google-icon" />
+            <img
+              src={fbIcon}
+              alt="fb-icon"
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleOAuthLogin('facebook')}
+            />
+            <img
+              src={googleIcon}
+              alt="google-icon"
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleOAuthLogin('google')}
+            />
             <img src={whIcon} alt="whatsapp-icon" />
-          </div>*/}
-          
+          </div>
         </div>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default VendorLogin;
