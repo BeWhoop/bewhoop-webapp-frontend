@@ -17,8 +17,8 @@ const toggleSidebar = () => {
 <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="scrollable">
           <div className="placeholder-box">
-            <h1>Placeholder Page</h1>
-            <p>This is a placeholder for upcoming features.</p>
+            <h1>Coming Soon, Stay Updated!</h1>
+            <p>Coming Soon</p>
           </div>
         </div>
       </div>

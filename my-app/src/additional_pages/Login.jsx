@@ -157,6 +157,7 @@ function Login() {
             <a href="/vendor/signup" style={{ color: '#BE0000' }}>Vendor</a>{' '}/{' '}
             <a href="/hoster/signup" style={{ color: '#BE0000' }}>Host</a>
           </span>
+          {/*NOT IMPLEMENTED YET
           <div className="login-divider-with-text">
             <span className="login-line"></span>
             <span className="login-or-text">or</span>
@@ -167,7 +168,8 @@ function Login() {
             <img src={fbIcon} alt="fb-icon" />
             <img src={googleIcon} alt="google-icon" />
             <img src={whIcon} alt="whatsapp-icon" />
-          </div>
+          </div>*/}
+          
         </div>
       </form>
     </div>

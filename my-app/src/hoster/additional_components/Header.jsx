@@ -17,11 +17,14 @@ function Header({ toggleSidebar, isSidebarOpen }) {
         </button>
       )}
 
+      {/*not implemented yet in backend
+      
       <input
         type="text"
         className="search-input"
         placeholder="Q   Search..."
       />
+      */}
 
       <div className="user-info">
         <img

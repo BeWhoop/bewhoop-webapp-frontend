@@ -17,8 +17,8 @@ function Placeholder() {
         <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <div className="placeholder-body">
           <div className="placeholder-box">
-            <h1 className="placeholder-title">Placeholder Page</h1>
-            <p className="placeholder-text">This is a placeholder for upcoming features.</p>
+            <h1 className="placeholder-title">Coming Soon. Stay Updated!</h1>
+            <p className="placeholder-text">Coming Soon.</p>
           </div>
         </div>
       </div>

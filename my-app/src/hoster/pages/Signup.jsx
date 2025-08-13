@@ -149,6 +149,8 @@ function Signup() {
             Already Have an Account?{' '}
             <a href="/" style={{ color: '#BE0000' }}>Sign In</a>
           </span>
+          {/*NOT IMPLEMENTED YET IN BACKEND
+          
           <div className="signup1-divider-with-text">
             <span className="signup1-line"></span>
             <span className="signup1-or-text">or</span>
@@ -160,6 +162,7 @@ function Signup() {
             <img src={googleIcon} alt="google-icon" />
             <img src={whIcon} alt="whatsapp-icon" />
           </div>
+          */}
         </div>
       </form>
       {showTOS && <TOS onClose={() => setShowTOS(false)} />}

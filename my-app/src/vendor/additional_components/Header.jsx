@@ -16,12 +16,14 @@ function Header({ toggleSidebar, isSidebarOpen }) {
           <FaBars size={22} />
         </button>
       )}
-
+      {/*not implemented yet in backend
+      
       <input
         type="text"
         className="search-input"
         placeholder="Q   Search..."
       />
+      */}
 
       <div className="user-info">
         <img
