@@ -8,53 +8,17 @@ import Header from '../additional_components/Header';
 import VendorCard from '../additional_components/VendorCard.jsx';
 import '../styles/VendorMarketplace.css';
 import placeholderImage from '../assets/placeholder-image.png';
+import VendorSkeleton from "../additional_components/VendorSkeleton.jsx";
 
 const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 
-// Sample vendor list for fallback when API fetch fails
-const sampleVendors = [
-  {
-    id: 1,
-    full_name: "Ali's Catering",
-    services: ["Catering", "Event Planning"],
-    city: "Islamabad",
-    budget_range: "$500 - $2000",
-  },
-  {
-    id: 2,
-    full_name: "Zara Decor",
-    services: ["Decoration", "Floral Arrangements"],
-    city: "Lahore",
-    budget_range: "$300 - $1500",
-  },
-  {
-    id: 3,
-    full_name: "Khan Photography",
-    services: ["Photography", "Videography"],
-    city: "Karachi",
-    budget_range: "$400 - $1800",
-  },
-  {
-    id: 4,
-    full_name: "Sana Events",
-    services: ["Event Management", "Lighting"],
-    city: "Rawalpindi",
-    budget_range: "$600 - $2500",
-  },
-  {
-    id: 5,
-    full_name: "Bilal Music",
-    services: ["DJ Services", "Live Band"],
-    city: "Islamabad",
-    budget_range: "$200 - $1000",
-  },
-];
 
 const VendorMarketplace = () => {
   const [vendors, setVendors] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -62,6 +26,8 @@ const VendorMarketplace = () => {
 
   const fetchVendors = async (query = '') => {
     try {
+      
+      setLoading(true);
       const token = localStorage.getItem('token');
       const queryString = `?query=${encodeURIComponent(query.trim() || 'islamabad')}`;
 
@@ -77,6 +43,7 @@ const VendorMarketplace = () => {
 
       const result = await response.json();
       setVendors(result.vendors || []);
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching vendors:', error);
       toast.error('Failed to fetch vendors');
@@ -116,39 +83,34 @@ const VendorMarketplace = () => {
               </div>
             </div>
 
-            <div className="vendor-grid">
-              {(vendors.length > 0 ? vendors : sampleVendors).map((vendor, i) => (
-                <VendorCard
-                  key={i}
-                  vendor={{
-                    name: vendor.full_name,
-                    role: vendor.services?.join(', ') || 'N/A',
-                    location: vendor.city || 'Unknown',
-                    priceRange: vendor.budget_range || 'N/A',
-                    tags: vendor.services || [],
-                  }}
-                  image={placeholderImage}
-                  onClick={() =>
-                    navigate('/marketplace/profile', {
-                      state: {
-                        vendor: {
-                          id: vendor.id,
-                          fullName: vendor.full_name,
-                          services: vendor.services || [],
-                          city: vendor.city,
-                          budget: vendor.budget_range,
-                        },
-                        image: placeholderImage,
-                      }
-                    })
-                  }
-                />
-              ))}
+            {loading ? (
+              <VendorSkeleton count={6} />
+            ) : (
+              <div className="vendor-grid">
+                {vendors.map((vendor, i) => (
+                  <VendorCard
+                    key={i}
+                    vendor={{
+                      name: vendor.full_name,
+                      role: vendor.services?.join(', ') || 'N/A',
+                      location: vendor.city || 'Unknown',
+                      priceRange: vendor.budget_range || 'N/A',
+                      tags: vendor.services || [],
+                    }}
+                    image={placeholderImage}
+                    onClick={() =>
+                      navigate('/marketplace/profile', {
+                        state: { vendor, image: placeholderImage }
+                      })
+                    }
+                  />
+                ))}
+              </div>
+            )}
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

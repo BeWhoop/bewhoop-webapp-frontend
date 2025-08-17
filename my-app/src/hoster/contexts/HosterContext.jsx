@@ -7,6 +7,7 @@ export const HosterProvider = ({ children }) => {
     fullName: '',
     email : '',
     password : '',
+    phone:'',
     eventFrequency : '',
     avgSize : 0,
     eventTypes : [],

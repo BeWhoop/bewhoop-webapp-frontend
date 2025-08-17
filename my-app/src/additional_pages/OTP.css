@@ -16,7 +16,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,8 +29,25 @@
   border-radius: 20px;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
+  position: relative; /* Added for positioning close button */
+}
+
+.otp-close {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #060606;
+  padding: 0.5rem;
+}
+
+.otp-close:hover {
+  color: #BE0000;
 }
 
 .otp-modal h2 {
@@ -90,5 +107,11 @@
   .otp-submit {
     padding: 0.6rem 2rem;
     font-size: 0.95rem;
+  }
+
+  .otp-close {
+    top: 8px;
+    left: 8px;
+    font-size: 1rem;
   }
 }

@@ -13,6 +13,7 @@ import TOS from '../additional_components/TOS.jsx';
 function Signup() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -22,6 +23,10 @@ function Signup() {
   const baseURL = import.meta.env.VITE_MOBILE_BASE_URL;
   const navigate = useNavigate();
 
+  const isPhoneValid = (phone) => {
+    const phoneRegex = /^\+\d{10,15}$/;
+    return phoneRegex.test(phone);
+  }
   const isPasswordValid = (pwd) => {
     const regex = /^.{8,}$/;
     return regex.test(pwd);
@@ -29,7 +34,7 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!fullName || !email || !password) {
+    if (!fullName || !email || !password || !phone) {
       toast.error('Please fill in all fields.');
       return;
     }
@@ -39,6 +44,10 @@ function Signup() {
     }
     if (!isPasswordValid(password)) {
       toast.error('Password must be at least 8 characters long.');
+      return;
+    }
+    if (!isPhoneValid(phone)) {
+      toast.error('Please enter a valid phone number like +921234567890');
       return;
     }
     if (!termsAccepted) {
@@ -53,6 +62,7 @@ function Signup() {
       fullName,
       email,
       password,
+      phone
     }));
     toast.success('Successful!');
     navigate('/hoster/setup');
@@ -119,6 +129,20 @@ function Signup() {
           >
             {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
           </span>
+        </div> 
+        {/* Phone Field */}
+        <div className="signup1-password-container">
+          <label className="signup1-label1">Phone Number</label>
+        </div>
+        <div className="signup1-input-wrapper">
+          <input
+            type="tel"
+            className="signup1-simple-input"
+              placeholder="+923331234567"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              aria-label="Phone number"
+          />
         </div>
         {/* Terms and Conditions */}
         <div className="signup1-password-container">
@@ -147,20 +171,21 @@ function Signup() {
         <div className="signup1-social-icons">
           <span className="signup1-login-text">
             Already Have an Account?{' '}
-            <a href="/host/sign-in" style={{ color: '#BE0000' }}>Sign In</a>
+            <a href="/" style={{ color: '#BE0000' }}>Sign In</a>
           </span>
           
-          <div className="signup1-divider-with-text">
-            <span className="signup1-line"></span>
-            <span className="signup1-or-text">or</span>
-            <span className="signup1-line"></span>
+          {/*
+          <div className="signup-divider-with-text">
+            <span className="signup-line"></span>
+            <span className="signup-or-text">or</span>
+            <span className="signup-line"></span>
           </div>
-          <span className="signup1-login-text">Social Apps</span>
-          <div className="signup1-social-icons-icons">
-            <img src={fbIcon} alt="fb-icon" />
-            <img src={googleIcon} alt="google-icon" />
-            <img src={whIcon} alt="whatsapp-icon" />
-          </div>
+          <span className="signup-login-text">Social Apps</span>
+          <div className="signup-social-icons-icons">
+            <img src={fbIcon} alt="fb-icon" onLoad/>
+            <img src={googleIcon} alt="google-icon" onLoad/>
+            <img src={whIcon} alt="whatsapp-icon" onLoad/>
+          </div> */}
           
         </div>
       </form>

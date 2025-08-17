@@ -21,7 +21,7 @@ const toggleSidebar = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`${baseURL}/events`, {
+      const response = await fetch(`${baseURL}/web/events`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

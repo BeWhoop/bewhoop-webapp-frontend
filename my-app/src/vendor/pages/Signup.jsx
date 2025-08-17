@@ -1,3 +1,4 @@
+
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -14,6 +15,7 @@ function Signup() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showTOS, setShowTOS] = useState(false);
@@ -26,10 +28,14 @@ function Signup() {
     const regex = /^.{8,}$/;
     return regex.test(pwd);
   };
+const isPhoneValid = (phone) => {
+    const phoneRegex = /^\+\d{10,15}$/;
+    return phoneRegex.test(phone);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!fullName || !email || !password) {
+    if (!fullName || !email || !password || !phone) {
       toast.error('Please fill in all fields.');
       return;
     }
@@ -39,6 +45,10 @@ function Signup() {
     }
     if (!isPasswordValid(password)) {
       toast.error('Password must be at least 8 characters long.');
+      return;
+    }
+    if (!isPhoneValid(phone)) {
+      toast.error('Please enter a valid phone number like +921234567890');
       return;
     }
     if (!termsAccepted) {
@@ -54,6 +64,7 @@ function Signup() {
       fullName,
       email,
       password,
+      phone
     }));
     toast.success('Successful!');
     navigate('/vendor/profile');
@@ -121,6 +132,21 @@ function Signup() {
             {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
           </span>
         </div>
+        
+        {/* Phone Field */}
+        <div className="signup-password-container">
+          <label className="signup-label1">Phone Number</label>
+        </div>
+        <div className="signup-input-wrapper">
+          <input
+            type="tel"
+            className="signup-simple-input"
+              placeholder="+92 333 123 4567"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              aria-label="Phone number"
+          />
+        </div>
         {/* Terms and Conditions */}
         <div className="signup-password-container">
           <label className="signup-label1">
@@ -151,6 +177,7 @@ function Signup() {
             <a href="/" style={{ color: '#BE0000' }}>Sign In</a>
           </span>
 
+          {/*
           <div className="signup-divider-with-text">
             <span className="signup-line"></span>
             <span className="signup-or-text">or</span>
@@ -161,7 +188,7 @@ function Signup() {
             <img src={fbIcon} alt="fb-icon" onLoad/>
             <img src={googleIcon} alt="google-icon" onLoad/>
             <img src={whIcon} alt="whatsapp-icon" onLoad/>
-          </div>
+          </div> */}
         </div>
       </form>
       {showTOS && <TOS onClose={() => setShowTOS(false)} />}

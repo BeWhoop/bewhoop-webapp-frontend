@@ -173,12 +173,13 @@
 }
 
 /* ==========  RESPONSIVE  ========== */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .vendor-grid {
      display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center; 
     gap: 10px;
+    padding: 1rem 3rem;
   }
 }
 

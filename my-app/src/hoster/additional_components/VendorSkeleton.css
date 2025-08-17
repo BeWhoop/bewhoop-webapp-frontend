@@ -1,0 +1,23 @@
+.skeleton-card {
+  padding: 10px;
+  background: #999999;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.vendor-skeleton-image {
+  border-radius: 8px;
+}
+
+.vendor-skeleton-details {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vendor-skeleton-tags {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}

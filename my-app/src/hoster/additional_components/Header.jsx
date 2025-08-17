@@ -9,6 +9,13 @@ import { FaBars } from "react-icons/fa";
 function Header({ toggleSidebar, isSidebarOpen }) {
   const { hosterData } = useContext(HosterContext);
 
+  const getProfileImage = () => {
+    if (hosterData?.profilePhoto) {
+      return URL.createObjectURL(hosterData.profilePhoto);
+    }
+    return defaultImage;
+  };
+  
   return (
     <header className="header">
       {!isSidebarOpen && (
@@ -27,8 +34,7 @@ function Header({ toggleSidebar, isSidebarOpen }) {
       */}
 
       <div className="user-info">
-        <img
-          src={defaultImage}
+        <img src={getProfileImage()}
           alt="User"
           className="user-photo"
         />

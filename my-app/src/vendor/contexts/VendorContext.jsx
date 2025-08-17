@@ -6,17 +6,19 @@ export const VendorProvider = ({ children }) => {
   const [vendorData, setVendorData] = useState({
     fullName: '',
     email : '',
-    phone:'00000000000',
+    password: '',
+    phone:'',
+    services: [],
+    city: '',
     profileImage: null,
     description: '',
-    services: [],
     location: '',
-    mapLink: '',
+    mapLink: '',//not in db
     minPrice: 0,
     maxPrice: 0,
-    cnicFront: null,
-    cnicBack: null,
-    portfolio: [],
+    portfolio_images:[],
+    portfolio_videos: [],
+    socialProof: [],
   });
 
   return (

@@ -32,8 +32,7 @@ import VendorProtectedRoute from './vendor/additional_components/ProtectedRoute'
 import VendorPlaceholder from './vendor/additional_components/PlaceHolder';
 
 import ResetPass from './additional_pages/ResetPass';
-import VendorLogin from './additional_pages/VendorLogin';
-import HostLogin from './additional_pages/HostLogin';
+import Login from './additional_pages/Login';
 
 function App() {
   return (
@@ -64,8 +63,7 @@ function App() {
 
           <Routes>
             {/* ─── Public Routes ─── */}
-            <Route path="/" element={<VendorLogin />} />
-            <Route path="/host/sign-in" element={<HostLogin />} />
+            <Route path="/" element={<Login />} />
             <Route path="/hoster/signup" element={<HosterSignup />} />
             <Route path="/vendor/signup" element={<VendorSignup />} />
             <Route path="/reset-password" element={<ResetPass />} />

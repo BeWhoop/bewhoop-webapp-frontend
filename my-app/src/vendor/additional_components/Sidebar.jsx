@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { logout } from '../../supabaseClient.js';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import logo from '../assets/BeWhoopLogo.png';
@@ -22,23 +23,25 @@ function Sidebar({ toggleSidebar }) {
   const isActive = (path) => currentPath === path;
 
   const handleLogout = async () => {
-    setIsLoggingOut(true);
-    const loadingToast = toast.loading('Logging out...');
+  setIsLoggingOut(true);
+  const loadingToast = toast.loading('Logging out...');
 
-    try {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user'); // optional
-      await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate delay
-      toast.success('Logged out successfully.');
-      navigate('/');
-    } catch (err) {
-      console.error(err);
-      toast.error('Logout failed.');
-    } finally {
-      toast.dismiss(loadingToast);
-      setIsLoggingOut(false);
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const { error } = await logout();     
+    if (error) {
+      toast.error('Logout failed. Please try again.');
+      return;
     }
-  };
+    toast.success('Logged out successfully.');
+    navigate('/');
+  } catch (err) {
+    toast.error('Unexpected error during logout.');
+  } finally {
+    toast.dismiss(loadingToast);
+    setIsLoggingOut(false);
+  }
+};
 
   return (
     <aside className="sidebar">

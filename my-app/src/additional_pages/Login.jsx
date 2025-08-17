@@ -1,4 +1,4 @@
-import { supabase } from '../supabaseClient.js';
+import { supabase, loginInWithGoogle } from '../supabaseClient.js';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -8,65 +8,66 @@ import bgpic from '../vendor/assets/bg-pic.png';
 import fbIcon from '../vendor/assets/FB-Icon.png';
 import googleIcon from '../vendor/assets/Google-Icon.png';
 import whIcon from '../vendor/assets/WH-Icon.png';
+import OTP from './OTP.jsx'; 
 
 const baseURL = import.meta.env.VITE_WEB_API_BASE_URL;
 
-function VendorLogin() {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showOTPModal, setShowOTPModal] = useState(false);
   const navigate = useNavigate();
 
-  const handleOAuthLogin = async (provider) => {
-    try {
-      // Step 1: Request OAuth login URL from backend
-      const res = await fetch(`${baseURL}/vendors/${provider}`, {
-        method: 'GET',
-        credentials: 'include',
-      });
-      if (!res.ok) throw new Error(`Failed to get ${provider} login URL`);
-      const data = await res.json();
-      // Step 2: Redirect browser to provider login page
-      if (data?.url) {
-        window.location.href = data.url;
-      } else {
-        toast.error('No login URL returned.');
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error(`Unable to initiate ${provider} login`);
-    }
-  };
+  
+  const handleGoogleAuth = async () => {
+  try {
+    setIsSubmitting(true);
+    const redirectTo = `${window.location.origin}/`;
+    const { error } = await loginInWithGoogle(redirectTo);
+    if (error) throw error;
+    toast.success('Redirecting to Google login...');
+  } catch (error) {
+    toast.error(`Google login failed: ${error.message}`);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+useEffect(() => {
+  const { data: authListener } = supabase.auth.onAuthStateChange(
+    async (event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        localStorage.setItem('token', session.access_token);
 
-  // Step 3: Detect token in URL after redirect
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    if (token) {
-      (async () => {
-        try {
-          const res = await fetch(`${baseURL}/onboarding/oauth/callback`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token }),
-          });
-          const data = await res.json();
-          if (!res.ok) throw new Error(data?.message || 'OAuth callback failed');
-          localStorage.setItem('token', data.token);
-          toast.success('Login successful!');
-          navigate('/vendor/dashboard');
-        } catch (err) {
-          toast.error('OAuth login failed');
+        // fetch profile once
+        const { data: profile, error } = await supabase
+          .from('users')
+          .select('role')
+          .eq('email', session.user.email)
+          .single();
+
+        if (error || !profile) {
+          toast.error('Please create your profile first.');
+          navigate('/', { replace: true });
+          return;
         }
-      })();
-    }
-  }, []);
 
-  const isPasswordValid = (pwd) => {
-    const regex = /^.{8,}$/;
-    return regex.test(pwd);
-  };
+        if (profile.role === 'host') {
+          navigate('/hoster/dashboard', { replace: true });
+        } else if (profile.role === 'vendor') {
+          navigate('/vendor/dashboard', { replace: true });
+        } else {
+          toast.error('Create a profile first to continue.');
+          navigate('/', { replace: true });
+        }
+      }
+    }
+  );
+
+  return () => authListener.subscription.unsubscribe();
+}, [navigate]);
+
 
   const handleForgotPass = async () => {
     if (!email) {
@@ -78,8 +79,8 @@ function VendorLogin() {
       return;
     }
     try {
-      const response = await fetch(`${baseURL}/users/reset-password`, {
-        method: 'POST',
+      const response = await fetch(`${baseURL}/onboarding/forgot-password`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -114,7 +115,7 @@ function VendorLogin() {
     setIsSubmitting(true);
     const loadingToast = toast.loading('Logging in...');
     try {
-      const response = await fetch(`${baseURL}/users/login`, {
+      const response = await fetch(`${baseURL}/onboarding/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -140,6 +141,8 @@ function VendorLogin() {
   };
 
   return (
+    <>
+    {showOTPModal && <OTP onClose={() => setShowOTPModal(false)} />}
     <div className="login-vendor-card">
       <div className="login-left-bg">
         <div className="login-text-group">
@@ -149,7 +152,7 @@ function VendorLogin() {
       </div>
       <form className="login-vendor-info" onSubmit={handleSubmit}>
         <div className="login-title-group">
-          <h1>Sign In As A Vendor</h1>
+          <h1>Sign In to Your Account</h1>
           <p>Sign in right now to manage your profile and services.</p>
         </div>
         {/* Email Field */}
@@ -205,20 +208,22 @@ function VendorLogin() {
         </button>
         <div className="login-social-icons">
           <div className="login-vertical-text-group">
-            <span className="login-login-text">
-              Not A Vendor?{' '}
-              <a href="/host/sign-in" style={{ color: '#BE0000' }}>
-                Host Sign In
+           <span className="login-login-text">
+              Signup as A{' '}
+              <a href="/vendor/signup" style={{ color: '#BE0000' }}>
+                Vendor
               </a>
             </span>
             <span className="login-vertical-divider"></span>
             <span className="login-login-text">
-              First time here?{' '}
-              <a href="/vendor/signup" style={{ color: '#BE0000' }}>
-                Join As Vendor
+              Signup as A{' '}
+              <a href="/hoster/signup" style={{ color: '#BE0000' }}>
+                Host
               </a>
             </span>
           </div>
+
+
           <div className="login-divider-with-text">
             <span className="login-line"></span>
             <span className="login-or-text">or</span>
@@ -229,20 +234,25 @@ function VendorLogin() {
               src={fbIcon}
               alt="fb-icon"
               style={{ cursor: 'pointer' }}
-              onClick={() => handleOAuthLogin('facebook')}
+              onClick={() => handleFacebookAuth()}
             />
             <img
               src={googleIcon}
               alt="google-icon"
               style={{ cursor: 'pointer' }}
-              onClick={() => handleOAuthLogin('google')}
+              onClick={() => handleGoogleAuth()}
             />
-            <img src={whIcon} alt="whatsapp-icon" />
+            <img 
+             src={whIcon} 
+             alt="whatsapp-icon"
+             style={{cursor:'pointer'}}
+             onClick={()=> setShowOTPModal(true)} />
           </div>
         </div>
       </form>
     </div>
+  </>
   );
 }
 
-export default VendorLogin;
+export default Login;
